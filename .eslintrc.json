@@ -1,3 +1,31 @@
 {
-  "extends": "next/core-web-vitals"
+    "extends": "next/core-web-vitals",
+    "rules": {
+        "indent": "off",
+        "import/no-unresolved": 0,
+        "import/no-anonymous-default-export": 0,
+        "operator-linebreak": [
+            1,
+            "after",
+            { "overrides": { "?": "after", "+=": "none", "=": "none" } }
+        ],
+        "template-curly-spacing": "off",
+        "prefer-promise-reject-errors": "off",
+        "implicit-arrow-linebreak": "off",
+        "no-return-assign": "off",
+        "no-use-before-define": "off",
+        "no-shadow": "off",
+        "no-nested-ternary": "off",
+        "default-case": "off",
+        "no-param-reassign": ["error", { "props": false }],
+        "react-hooks/exhaustive-deps": "warn",
+        "react/no-unescaped-entities": 0,
+        "no-underscore-dangle": "warn",
+        "no-unused-expressions": "off"
+    },
+    "env": {
+        "browser": true,
+        "jest": true,
+        "es2021": true
+    }
 }
