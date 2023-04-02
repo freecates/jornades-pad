@@ -1,7 +1,9 @@
-import api from '@/app/libs/api.js';
-import { IMeta } from '@/app/interfaces';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import api from '@/app/libs/api.js';
+import { IMeta, IEvent } from '@/app/interfaces';
+import EventsList from '@/app/componnents/EventsList';
+
 import styles from '../page.module.scss';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -11,7 +13,8 @@ type SlugPageProps = {
         meta: IMeta;
         content: {
             title: string;
-            mainContent: string;
+            mainContent?: string;
+            pads?: IEvent[];
         };
     };
 };
@@ -24,14 +27,21 @@ export default async function SlugPage({ params }) {
         <>
             <div className={styles.content}>
                 <h2 className={inter.className}>
-                    {content.title} <span>-&gt;</span>
+                    {content.title}
                 </h2>
-                <div
-                    className={inter.className}
-                    dangerouslySetInnerHTML={{
-                        __html: content.mainContent,
-                    }}
-                />
+                {content?.mainContent ? (
+                    <div
+                        className={inter.className}
+                        dangerouslySetInnerHTML={{
+                            __html: content.mainContent,
+                        }}
+                    />
+                ) : null}
+                {content?.pads ? (
+                    <div className={inter.className}>
+                        <EventsList events={content.pads} />
+                    </div>
+                ) : null}
             </div>
         </>
     );
@@ -63,7 +73,7 @@ const generateMetadata = async ({ params }): Promise<Metadata> => {
 };
 
 export const generateStaticParams = async () => {
-    return [{ slug: 'el-pad' }, { slug: 'la-nut' }];
+    return [{ slug: 'el-pad' }, { slug: 'la-nut' }, { slug: 'les-jornades-pad' }];
 };
 
 export const dynamicParams = false;
