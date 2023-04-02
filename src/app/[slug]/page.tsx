@@ -1,0 +1,73 @@
+import api from '@/app/libs/api.js';
+import { IMeta } from '@/app/interfaces';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import styles from '../page.module.scss';
+
+const inter = Inter({ subsets: ['latin'] });
+
+type SlugPageProps = {
+    pageData: {
+        meta: IMeta;
+        content: {
+            title: string;
+            mainContent: string;
+        };
+    };
+};
+
+export default async function SlugPage({ params }) {
+    const { slug } = params;
+    const { pageData }: SlugPageProps = await getData(slug);
+    const { content } = pageData;
+    return (
+        <>
+            <div className={styles.content}>
+                <h2 className={inter.className}>
+                    {content.title} <span>-&gt;</span>
+                </h2>
+                <div
+                    className={inter.className}
+                    dangerouslySetInnerHTML={{
+                        __html: content.mainContent,
+                    }}
+                />
+            </div>
+        </>
+    );
+}
+
+const getData = async (slug: string) => {
+    const camelCased = slug.replace(/-([a-z])/g, function (g) {
+        return g[1].toUpperCase();
+    });
+    const data = await api.padData.getData(camelCased);
+    return {
+        pageData: !data ? null : { ...data[0] },
+    };
+};
+
+const generateMetadata = async ({ params }): Promise<Metadata> => {
+    const { slug } = params;
+    const camelCased = slug.replace(/-([a-z])/g, function (g) {
+        return g[1].toUpperCase();
+    });
+    const data = await api.padData.getData(camelCased);
+    if (!data) return { title: 'Not Found' };
+    const meta = { ...data[0].meta };
+    const { pageTitle, title, pageDescription } = meta;
+    return {
+        title: pageTitle,
+        description: `${pageDescription} | ${title}`,
+    };
+};
+
+export const generateStaticParams = async () => {
+    return [{ slug: 'el-pad' }, { slug: 'la-nut' }];
+};
+
+export const dynamicParams = false;
+
+export const revalidate = 30;
+
+export { generateMetadata };
