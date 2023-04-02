@@ -26,9 +26,9 @@ export default async function SlugPage({ params }) {
     return (
         <>
             <div className={styles.content}>
-                <h2 className={inter.className}>
+                <h1 className={inter.className}>
                     {content.title}
-                </h2>
+                </h1>
                 {content?.mainContent ? (
                     <div
                         className={inter.className}
