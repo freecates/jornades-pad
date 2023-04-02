@@ -10,3 +10,10 @@ export interface IRoute {
     route: string;
     description?: string;
 }
+
+export interface IEvent {
+    name: string;
+    place: string;
+    map: string;
+    date: string;
+}
