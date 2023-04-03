@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google';
 import { IEvent } from '@/app/interfaces';
 import styles from './EventsList.module.scss';
+import AddToCalendarButtonWrapper from './AddToCalendarButtonWrapper';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -35,6 +36,15 @@ const EventsList: React.FC<Props> = ({ events }) => {
                             </li>
                             <li>
                                 <strong>Quan:</strong> {dateToLocale(e.date, 'ca')}
+                            </li>
+                            <li>
+                                <AddToCalendarButtonWrapper
+                                    name={`Jornades PAD - ${e.name}`}
+                                    place={e.place}
+                                    date={e.date}
+                                    calendars={['Google', 'iCal']}
+                                    organizer={'Adhoc Cultura|info@adhoc-cultura.com'}
+                                />
                             </li>
                         </ul>
                     </div>
