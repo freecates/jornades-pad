@@ -16,4 +16,5 @@ export interface IEvent {
     place: string;
     map: string;
     date: string;
+    route: string;
 }
