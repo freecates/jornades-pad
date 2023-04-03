@@ -18,7 +18,7 @@ const AddToCalendarButtonWrapper: React.FC<Props> = ({ name, place, date, calend
                 location={place}
                 startDate={date}
                 startTime='00:00'
-                timeZone='Europe/Paris'
+                timeZone='UTC'
                 buttonStyle='text'
                 hideTextLabelButton
                 buttonsList
