@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google';
 import { IEvent } from '@/app/interfaces';
 import styles from './EventsList.module.scss';
 import AddToCalendarButtonWrapper from './AddToCalendarButtonWrapper';
+import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,9 +25,13 @@ const EventsList: React.FC<Props> = ({ events }) => {
             {events.map((e, id) =>
                 e.name ? (
                     <div className={styles.card} key={id}>
-                        <h2 className={inter.className}>
-                            {e.name} <span className={styles.right}>-&gt;</span>
-                        </h2>
+                        {events.length > 1 ? (
+                            <Link href={`/les-jornades-pad/${e.route}`}>
+                                <h2 className={inter.className}>
+                                    {e.name} <span className={styles.right}>-&gt;</span>
+                                </h2>
+                            </Link>
+                        ) : null}
                         <ul className={inter.className}>
                             <li>
                                 <strong>On:</strong> {e.place}{' '}
@@ -37,6 +42,7 @@ const EventsList: React.FC<Props> = ({ events }) => {
                             <li>
                                 <strong>Quan:</strong> {dateToLocale(e.date, 'ca')}
                             </li>
+                            <li><strong>Bases:</strong> properament</li>
                             <li>
                                 <AddToCalendarButtonWrapper
                                     name={`Jornades PAD - ${e.name}`}
