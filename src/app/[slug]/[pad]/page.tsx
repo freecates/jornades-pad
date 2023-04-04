@@ -15,14 +15,15 @@ type PadPageProps = {
         date: string;
         summary: string;
         route: string;
+        startTime: string;
     };
 };
 
 export default async function PadPage({ params }) {
     const { slug, pad } = params;
     const { pageData }: PadPageProps = await getData(slug, pad);
-    const { name, place, map, date, summary, route } = pageData;
-    const event = [{name, place, map, route, date}];
+    const { name, place, map, date, summary, route, startTime } = pageData;
+    const event = [{name, place, map, route, date, summary, startTime}];
     return (
         <>
             <div className={styles.content}>
@@ -62,17 +63,18 @@ const getData = async (slug: string, pad) => {
 };
 
 const generateMetadata = async ({ params }): Promise<Metadata> => {
-    const { slug } = params;
+    const { slug, pad } = params;
     const camelCased = slug.replace(/-([a-z])/g, function (g) {
         return g[1].toUpperCase();
     });
     const data = await api.padData.getData(camelCased);
     if (!data) return { title: 'Not Found' };
-    const meta = { ...data[0].meta };
-    const { pageTitle, title, pageDescription } = meta;
+    const pads = data[0].content.pads;
+    const padData = pads.filter(x => x.route === pad);
+    const { name, summary } = padData[0];
     return {
-        title: pageTitle,
-        description: `${pageDescription} | ${title}`,
+        title: `${name}`,
+        description: `${summary}`,
     };
 };
 

@@ -50,6 +50,8 @@ const EventsList: React.FC<Props> = ({ events }) => {
                                     date={e.date}
                                     calendars={['Google', 'iCal']}
                                     organizer={'Adhoc Cultura|info@adhoc-cultura.com'}
+                                    description={e.summary}
+                                    startTime={e.startTime}
                                 />
                             </li>
                         </ul>
