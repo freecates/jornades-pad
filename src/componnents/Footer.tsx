@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google';
-import { IRoute } from '@/app/interfaces';
+import { IRoute } from '@/interfaces';
 import styles from './Footer.module.scss';
 import Link from 'next/link';
 

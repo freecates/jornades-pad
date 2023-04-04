@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google';
-import { IEvent } from '@/app/interfaces';
+import { IEvent } from '@/interfaces';
 import styles from './EventsList.module.scss';
 import AddToCalendarButtonWrapper from './AddToCalendarButtonWrapper';
 import Link from 'next/link';
