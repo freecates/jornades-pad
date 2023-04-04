@@ -1,4 +1,4 @@
-import Header from '../componnents/Header';
+import Header from '@/componnents/Header';
 
 export default function SlugLayout({ children }: { children: React.ReactNode }) {
     return (

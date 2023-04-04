@@ -1,9 +1,9 @@
-import api from '@/app/libs/api.js';
-import { IRoute } from '@/app/interfaces';
+import api from '@/libs/api.js';
+import { IRoute } from '@/interfaces';
 import type { Metadata } from 'next';
 import './globals.css';
 import styles from './layout.module.scss';
-import Footer from './componnents/Footer';
+import Footer from '@/componnents/Footer';
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
     const {

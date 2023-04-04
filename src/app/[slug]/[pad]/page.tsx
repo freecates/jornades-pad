@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import api from '@/app/libs/api.js';
-import EventsList from '@/app/componnents/EventsList';
+import api from '@/libs/api.js';
+import EventsList from '@/componnents/EventsList';
 
 import styles from '@/app/page.module.scss';
 

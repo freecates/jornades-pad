@@ -12,7 +12,6 @@ type Props = {
 };
 
 const AddToCalendarButtonWrapper: React.FC<Props> = ({ name, place, date, calendars, organizer, description, startTime }) => {
-    console.log('date ', date);
     return (
         <div className='add-to-calendar-button-wrapper'>
             <AddToCalendarButton
