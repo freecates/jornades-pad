@@ -27,7 +27,7 @@ const EventsList: React.FC<Props> = ({ events }) => {
                     <div className={styles.card} key={id}>
                         {events.length > 1 ? (
                             <Link href={`/les-jornades-pad/${e.route}`}>
-                                <h2 className={inter.className}>
+                                <h2 className={`${inter.className}  ${e.route ? styles[e.route] : ''}`}>
                                     {e.name} <span className={styles.right}>-&gt;</span>
                                 </h2>
                             </Link>

@@ -1,0 +1,12 @@
+.title {
+  color: #ffffff;
+  padding: 0.25rem 0.5rem;
+  display: inline-block;
+  border-bottom-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background: #000000;
+
+  &.pad-3dt {
+    background: rgb(190, 22, 34);
+  }
+}
