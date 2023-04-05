@@ -4,6 +4,7 @@ import api from '@/libs/api.js';
 import EventsList from '@/componnents/EventsList';
 
 import styles from '@/app/page.module.scss';
+import padPageStyles from '@/app/padPage.module.scss';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,7 +28,7 @@ export default async function PadPage({ params }) {
     return (
         <>
             <div className={styles.content}>
-                <h1 className={inter.className}>
+                <h1 className={`${inter.className} ${padPageStyles.title} ${route ? padPageStyles[route] : ''}`}>
                     {name}
                 </h1>
                 {summary ? (
@@ -49,28 +50,28 @@ export default async function PadPage({ params }) {
     );
 }
 
-const getData = async (slug: string, pad) => {
+const getData = async (slug: string, pad: string) => {
     const camelCased = slug.replace(/-([a-z])/g, function (g) {
         return g[1].toUpperCase();
     });
     const data = await api.padData.getData(camelCased);
     const pads = data[0].content.pads;
-    const padData = pads.filter(x => x.route === pad);
+    const padData = pads.filter((x: { route: string; }) => x.route === pad);
 
     return {
-        pageData: !data ? null : { ...data[0], ...padData[0] },
+        pageData: !data ? null : { ...padData[0] },
     };
 };
 
 const generateMetadata = async ({ params }): Promise<Metadata> => {
     const { slug, pad } = params;
-    const camelCased = slug.replace(/-([a-z])/g, function (g) {
+    const camelCased = slug.replace(/-([a-z])/g, function (g: string[]) {
         return g[1].toUpperCase();
     });
     const data = await api.padData.getData(camelCased);
     if (!data) return { title: 'Not Found' };
     const pads = data[0].content.pads;
-    const padData = pads.filter(x => x.route === pad);
+    const padData = pads.filter((x: { route: any; }) => x.route === pad);
     const { name, summary } = padData[0];
     return {
         title: `${name}`,
