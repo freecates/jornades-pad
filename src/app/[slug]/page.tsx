@@ -32,6 +32,7 @@ export default async function SlugPage({ params }) {
             <Image
               src={`/${content.image}`}
               alt={content.title}
+              className={styles.logo}
               width={95}
               height={95}
               priority
