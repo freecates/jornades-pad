@@ -79,6 +79,9 @@ const generateMetadata = async ({ params }): Promise<Metadata> => {
     return {
         title: pageTitle,
         description: `${pageDescription} | ${title}`,
+        alternates: {
+            canonical: `https://jornadespad.cat/${slug}`,
+        },
     };
 };
 
