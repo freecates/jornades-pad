@@ -16,6 +16,12 @@
     font-weight: 600;
     margin-bottom: 0.7rem;
   }
+  h1 {
+    &.flex {
+      display: flex;
+      align-items: center;
+    }
+  }
 }
 
 .description {

@@ -7,6 +7,10 @@
   min-height: 100vh;
 
   @media (min-width: 768px) {
-    padding: 4rem;
+    padding: 8rem 4rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 2rem 4rem;
   }
 }

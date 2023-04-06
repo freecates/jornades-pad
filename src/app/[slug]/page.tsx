@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import api from '@/libs/api.js';
 import { IMeta, IEvent } from '@/interfaces';
@@ -15,6 +16,7 @@ type SlugPageProps = {
             title: string;
             mainContent?: string;
             pads?: IEvent[];
+            image?: string; 
         };
     };
 };
@@ -26,7 +28,14 @@ export default async function SlugPage({ params }) {
     return (
         <>
             <div className={styles.content}>
-                <h1 className={inter.className}>
+                <h1 className={`${inter.className} ${content.image ? styles.flex : ''}`}>{content.image ? 
+            <Image
+              src={`/${content.image}`}
+              alt={content.title}
+              width={95}
+              height={95}
+              priority
+            /> : null }
                     {content.title}
                 </h1>
                 {content?.mainContent ? (
