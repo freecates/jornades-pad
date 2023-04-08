@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import api from '@/libs/api.js';
 import { IMeta, IEvent } from '@/interfaces';
 import EventsList from '@/componnents/EventsList';
+import Blockquote from '@/componnents/Blockquote';
 
 import styles from '../page.module.scss';
 
@@ -16,7 +17,8 @@ type SlugPageProps = {
             title: string;
             mainContent?: string;
             pads?: IEvent[];
-            image?: string; 
+            image?: string;
+            excerpt?: string;
         };
     };
 };
@@ -47,6 +49,9 @@ export default async function SlugPage({ params }) {
                         }}
                     />
                 ) : null}
+                {content?.excerpt ? 
+                <Blockquote content={content?.excerpt} />
+                : null}
                 {content?.pads ? (
                     <div className={inter.className}>
                         <EventsList events={content.pads} />
