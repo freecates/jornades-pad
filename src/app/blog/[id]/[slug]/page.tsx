@@ -39,7 +39,7 @@ const PostPad = async ({ params }) => {
                     }}
                 />
             ) : null}
-            <p>
+            <p className={inter.className}>
                 <small>
                     <Link href={'/blog'}>[tornar]</Link>
                 </small>
