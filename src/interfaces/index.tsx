@@ -20,3 +20,15 @@ export interface IEvent {
     summary: string;
     startTime: string;
 }
+
+export interface IPost {
+    id: number;
+    title: {
+        rendered: string;
+    };
+    slug: string;
+    _embedded: {
+        author: [{ name: string }];
+    };
+    date: string;
+}
