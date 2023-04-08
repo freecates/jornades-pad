@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import api from '@/libs/api.js';
 
@@ -18,8 +19,6 @@ const PostsPage = async () => {
     );
 };
 
-
-
 const getData = async () => {
     const posts = await api.wpData.getData('posts', 100, null, 23);
 
@@ -28,6 +27,14 @@ const getData = async () => {
     } else {
         return { posts: null };
     }
+};
+
+export const metadata: Metadata = {
+    title: 'Blog',
+    description: 'Darreres entrades del blog Patrimoni Art Digital',
+    alternates: {
+        canonical: `https://jornadespad.cat/blog`,
+    },
 };
 
 export default PostsPage;
