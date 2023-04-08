@@ -1,0 +1,43 @@
+/* center the blockquote in the page */
+.blockquote-wrapper {
+    display: flex;
+    padding: 0 20px;
+
+    /* Blockquote main style */
+    .blockquote {
+        position: relative;
+        font-weight: 800;
+        padding: 30px 0;
+        width: 100%;
+        max-width: 500px;
+        z-index: 1;
+        margin: 2.5rem auto;
+        align-self: center;
+        border-top: solid 1px;
+        border-bottom: solid 1px;
+
+        h3 {
+            position: relative;
+            font-size: 1.25rem;
+            font-weight: 800;
+            line-height: 1;
+            margin: 0;
+
+            /* increase header size after 600px */
+            @media all and (min-width: 600px) {
+                font-size: 2rem;
+
+            }
+        }
+
+        &:after {
+            position: absolute;
+            content: "”";
+            color: rgba(0, 0, 0, 1);
+            font-size: 7.5rem;
+            line-height: 0;
+            bottom: -33px;
+            right: 30px;
+        }
+    }
+}

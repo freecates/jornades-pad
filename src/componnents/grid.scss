@@ -1,6 +1,6 @@
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(33%, auto));
+    grid-template-columns: repeat(2, minmax(50%, auto));
     width: var(--max-width);
     max-width: 100%;
 
@@ -14,19 +14,24 @@
         h2 {
             font-weight: 600;
             margin-bottom: 0.7rem;
-
-            span {
-                display: inline-block;
-                transition: transform 200ms;
+            color: #ffffff;
+            padding: 0.25rem 0.5rem;
+            display: inline-block;
+            border-bottom-left-radius: 15px;
+            border-top-right-radius: 15px;
+            background: #000000;
+            &.pad-3dt {
+                background: rgb(190, 22, 34);
             }
         }
 
-        p {
-            margin: 0;
-            opacity: 0.6;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            max-width: 34ch;
+        span {
+            display: inline-block;
+            transition: transform 200ms;
+        }
+
+        ul {
+            list-style-type: none;
         }
 
         /* Enable hover only on non-touch devices */
@@ -36,8 +41,18 @@
                 border: 1px solid rgba(var(--card-border-rgb), 0.15);
             }
 
-            &:hover span {
-                transform: translateX(4px);
+            h2 {
+                &:hover {
+                    span.right {
+                        transform: translateX(4px);
+                    }
+                }
+            }
+
+            span.up {
+                &:hover {
+                    transform: translateY(-4px);
+                }
             }
         }
 
@@ -47,18 +62,13 @@
             }
         }
     }
-        
-    .blog-route {
-        grid-column: span 3;
-        text-align: center;
-    }
 
     /* Mobile and Tablet */
     @media (max-width: 1023px) {
         grid-template-columns: 1fr;
-        margin-bottom: 120px;
+        margin-bottom: 60px;
         max-width: 320px;
-        text-align: center;
+        width: 100%;
 
         .card {
             padding: 1rem 2.5rem;
@@ -66,10 +76,6 @@
             h2 {
                 margin-bottom: 0.5rem;
             }
-        }
-        
-        .blog-route {
-            grid-column: span 1;
         }
     }
 }

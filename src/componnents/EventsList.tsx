@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google';
 import { IEvent } from '@/interfaces';
+import { dateToLocale } from '@/utils/dateToLocale';
 import styles from './EventsList.module.scss';
 import AddToCalendarButtonWrapper from './AddToCalendarButtonWrapper';
 import Link from 'next/link';
@@ -10,16 +11,6 @@ type Props = {
     events: IEvent[];
 };
 const EventsList: React.FC<Props> = ({ events }) => {
-    const dateToLocale = (date: any, locale: string) => {
-        const event = new Date(date);
-        const options: Intl.DateTimeFormatOptions = {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-        };
-        return event.toLocaleDateString(locale, options);
-    };
     return (
         <div className={styles.grid}>
             {events.map((e, id) =>
