@@ -4,8 +4,7 @@ import api from '@/libs/api.js';
 import { dateToLocale } from '@/utils/dateToLocale';
 
 import styles from '@/app/page.module.scss';
-import Blockquote from '@/componnents/Blockquote';
-import Link from 'next/link';
+import Post from '@/componnents/Post';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,31 +18,15 @@ const PostPad = async ({ params }) => {
 
     return (
         <div className={styles.content}>
-            <h1
-                className={`${inter.className}`}
-                dangerouslySetInnerHTML={{
-                    __html: pageTitle,
-                }}
+            <Post
+                content={content}
+                id={post.id}
+                slug={post.slug}
+                date={date}
+                author={author}
+                excerpt={excerpt}
+                title={pageTitle}
             />
-            <p className={inter.className}>
-                <small>
-                    {author} | {date}
-                </small>
-            </p>
-            <Blockquote content={excerpt} />
-            {content ? (
-                <div
-                    className={`${inter.className} ${styles['m-b-1']}`}
-                    dangerouslySetInnerHTML={{
-                        __html: content,
-                    }}
-                />
-            ) : null}
-            <p className={inter.className}>
-                <small>
-                    <Link href={'/blog'}>[tornar]</Link>
-                </small>
-            </p>
         </div>
     );
 };
