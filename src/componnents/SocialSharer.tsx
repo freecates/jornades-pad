@@ -38,8 +38,8 @@ const SocialSharer: React.FC<SocialShareProps> = ({ type, id, slug, title }) => 
                 <TwitterShareButton
                     url={`https://jornadespad.cat/${type}/${id}/${slug}`}
                     title={title}
-                    hashtags={['BeneidaBogeria']}
-                    via='cdbcn'
+                    hashtags={['JornadesPad']}
+                    via='AdhocCultura'
                     className='Post__some-network__share-button'
                 >
                     <TwitterIcon size={25} round />
