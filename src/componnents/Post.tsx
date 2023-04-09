@@ -8,6 +8,7 @@ import styles from '@/app/page.module.scss';
 const inter = Inter({ subsets: ['latin'] });
 
 const Post = ({ title, author, date, excerpt, id, slug, content}) => {
+    const type = 'blog';
     return (
         <>
         <h1
@@ -21,7 +22,7 @@ const Post = ({ title, author, date, excerpt, id, slug, content}) => {
                     {author} | {date}
                 </small>
             </p>
-            <SocialSharer type={'blog'} id={id} slug={slug} title={title} />
+            <SocialSharer type={type} id={id} slug={slug} title={title} />
             <Blockquote content={excerpt} />
             {content ? (
                 <div
@@ -31,7 +32,7 @@ const Post = ({ title, author, date, excerpt, id, slug, content}) => {
                     }}
                 />
             ) : null}
-            <SocialSharer type={'post'} id={id} slug={slug} title={title} />
+            <SocialSharer type={type} id={id} slug={slug} title={title} />
             <p className={inter.className}>
                 <small>
                     <Link href={'/blog'}>[tornar]</Link>
