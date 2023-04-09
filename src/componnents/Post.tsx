@@ -21,7 +21,7 @@ const Post = ({ title, author, date, excerpt, id, slug, content}) => {
                     {author} | {date}
                 </small>
             </p>
-            <SocialSharer type={'post'} id={id} slug={slug} title={title} />
+            <SocialSharer type={'blog'} id={id} slug={slug} title={title} />
             <Blockquote content={excerpt} />
             {content ? (
                 <div
