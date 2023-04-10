@@ -1,4 +1,4 @@
-const dateToLocale = (date: any, locale: string) => {
+const dateToLocale = (date: string | number | Date, locale: string) => {
     const event = new Date(date);
     const options: Intl.DateTimeFormatOptions = {
         weekday: 'long',

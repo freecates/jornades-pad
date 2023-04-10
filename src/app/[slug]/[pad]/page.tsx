@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import api from '@/libs/api.js';
+import { htmlToString } from '@/utils/htmlToString';
 import EventsList from '@/componnents/EventsList';
 
 import styles from '@/app/page.module.scss';
@@ -73,7 +74,7 @@ const generateMetadata = async ({ params }): Promise<Metadata> => {
     const pads = data[0].content.pads;
     const padData = pads.filter((x: { route: any; }) => x.route === pad);
     const { name, summary } = padData[0];
-    const description = summary.replace(/(<([^>]+)>)/gi, '');
+    const description = htmlToString(summary);
     return {
         title: `${name}`,
         description: `${description}`,

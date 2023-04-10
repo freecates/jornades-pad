@@ -25,7 +25,7 @@ const PostsList: React.FC<Props> = ({ posts }) => {
                         </Link>
                         <p className={inter.className}>
                             <small>
-                                {p?._embedded.author[0]?.name} | {dateToLocale(p?.date, 'ca')}
+                                {p?.['_embedded'].author[0]?.name} | {dateToLocale(p?.date, 'ca')}
                             </small>
                         </p>
                     </div>
