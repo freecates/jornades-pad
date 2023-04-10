@@ -23,7 +23,7 @@ const PostPad = async ({ params }) => {
         '@type': 'NewsArticle',
         mainEntityOfPage: {
             '@type': 'WebPage',
-            '@id': `https://jornadespad.cat/blog/${post.id}/${post.slug}`,
+            '@id': `https://www.jornadespad.cat/blog/${post.id}/${post.slug}`,
         },
         author: {
             '@type': 'Person',
@@ -38,7 +38,7 @@ const PostPad = async ({ params }) => {
             },
         },
         description: `${htmlToString(content).substring(0, 240)}...`,
-        image: `https://jornadespad.cat${imageMetaData}`,
+        image: `https://www.jornadespad.cat${imageMetaData}`,
         datePublished: post?.date,
         headline: pageTitle,
     };
@@ -91,15 +91,15 @@ const generateMetadata = async ({ params }): Promise<Metadata> => {
         title: pageTitle,
         description: `${pageDescription}`,
         alternates: {
-            canonical: `https://jornadespad.cat/blog/${post.id}/${post.slug}`,
+            canonical: `https://www.jornadespad.cat/blog/${post.id}/${post.slug}`,
         },
         openGraph: {
             title: pageTitle,
             description: `${pageDescription}...`,
-            url: `https://jornadespad.cat/blog/${post.id}/${post.slug}`,
+            url: `https://www.jornadespad.cat/blog/${post.id}/${post.slug}`,
             images: [
                 {
-                    url: `https://jornadespad.cat${imageMetaData}`,
+                    url: `https://www.jornadespad.cat${imageMetaData}`,
                     width: 1024,
                     height: 1024,
                 },
@@ -112,7 +112,7 @@ const generateMetadata = async ({ params }): Promise<Metadata> => {
             description: `${pageDescription}...`,
             site: '@AdhocCultura',
             creator: 'Adhoc Cultura',
-            images: [`https://jornadespad.cat${imageMetaData}`],
+            images: [`https://www.jornadespad.cat${imageMetaData}`],
         },
     };
 };

@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: 'Blog',
     description: 'Darreres entrades del blog Patrimoni Art Digital',
     alternates: {
-        canonical: `https://jornadespad.cat/blog`,
+        canonical: `https://www.jornadespad.cat/blog`,
     },
 };
 

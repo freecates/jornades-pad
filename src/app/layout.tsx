@@ -46,7 +46,7 @@ const generateMetadata = async (): Promise<Metadata> => {
           },
         description: pageDescription,
         alternates: {
-            canonical: 'https://jornadespad.cat/',
+            canonical: 'https://www.jornadespad.cat/',
         },
     };
 };

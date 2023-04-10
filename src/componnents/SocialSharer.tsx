@@ -25,7 +25,7 @@ const SocialSharer: React.FC<SocialShareProps> = ({ type, id, slug, title }) => 
         <div className={`${styles.socialShareComponent}`}>
             <div className={styles.PostSomeNetwork}>
                 <FacebookShareButton
-                    url={`https://jornadespad.cat/${type}/${id}/${slug}`}
+                    url={`https://www.jornadespad.cat/${type}/${id}/${slug}`}
                     quote={title}
                     hashtag={'#JornadesPad'}
                     className='Post__some-network__share-button'
@@ -36,7 +36,7 @@ const SocialSharer: React.FC<SocialShareProps> = ({ type, id, slug, title }) => 
 
             <div className={styles.PostSomeNetwork}>
                 <TwitterShareButton
-                    url={`https://jornadespad.cat/${type}/${id}/${slug}`}
+                    url={`https://www.jornadespad.cat/${type}/${id}/${slug}`}
                     title={title}
                     hashtags={['JornadesPad']}
                     via='AdhocCultura'
@@ -48,7 +48,7 @@ const SocialSharer: React.FC<SocialShareProps> = ({ type, id, slug, title }) => 
 
             <div className={styles.PostSomeNetwork}>
                 <LinkedinShareButton
-                    url={`https://jornadespad.cat/${type}/${id}/${slug}`}
+                    url={`https://www.jornadespad.cat/${type}/${id}/${slug}`}
                     title={title}
                     className='Post__some-network__share-button'
                 >
@@ -58,7 +58,7 @@ const SocialSharer: React.FC<SocialShareProps> = ({ type, id, slug, title }) => 
 
             <div className={styles.PostSomeNetwork}>
                 <WhatsappShareButton
-                    url={`https://jornadespad.cat/${type}/${id}/${slug}`}
+                    url={`https://www.jornadespad.cat/${type}/${id}/${slug}`}
                     title={title}
                     className='Post__some-network__share-button'
                 >
@@ -68,7 +68,7 @@ const SocialSharer: React.FC<SocialShareProps> = ({ type, id, slug, title }) => 
 
             <div className={styles.PostSomeNetwork}>
                 <EmailShareButton
-                    url={`https://jornadespad.cat/${type}/${id}/${slug}`}
+                    url={`https://www.jornadespad.cat/${type}/${id}/${slug}`}
                     subject={title}
                     body={`Fes-li un cop d'ull a: "${title}"`}
                     className='Post__some-network__share-button'
