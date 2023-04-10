@@ -73,9 +73,10 @@ const generateMetadata = async ({ params }): Promise<Metadata> => {
     const pads = data[0].content.pads;
     const padData = pads.filter((x: { route: any; }) => x.route === pad);
     const { name, summary } = padData[0];
+    const description = summary.replace(/(<([^>]+)>)/gi, '');
     return {
         title: `${name}`,
-        description: `${summary}`,
+        description: `${description}`,
         alternates: {
             canonical: `https://jornadespad.cat/${slug}/${pad}`,
         },

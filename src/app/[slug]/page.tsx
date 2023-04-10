@@ -81,9 +81,10 @@ const generateMetadata = async ({ params }): Promise<Metadata> => {
     if (!data) return { title: 'Not Found' };
     const meta = { ...data[0].meta };
     const { pageTitle, title, pageDescription } = meta;
+    const description = pageDescription.replace(/(<([^>]+)>)/gi, '');
     return {
         title: pageTitle,
-        description: `${pageDescription} | ${title}`,
+        description: `${description} | ${title}`,
         alternates: {
             canonical: `https://jornadespad.cat/${slug}`,
         },
