@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import api from '@/libs/api.js';
+import { htmlToString } from '@/utils/htmlToString';
 import { IMeta, IEvent } from '@/interfaces';
 import EventsList from '@/componnents/EventsList';
 import Blockquote from '@/componnents/Blockquote';
@@ -50,8 +51,8 @@ export default async function SlugPage({ params }) {
                     />
                 ) : null}
                 {content?.excerpt ? 
-                <Blockquote content={content?.excerpt} />
-                : null}
+                <Blockquote content={content?.excerpt} /> :
+                null}
                 {content?.pads ? (
                     <div className={inter.className}>
                         <EventsList events={content.pads} />
@@ -81,7 +82,7 @@ const generateMetadata = async ({ params }): Promise<Metadata> => {
     if (!data) return { title: 'Not Found' };
     const meta = { ...data[0].meta };
     const { pageTitle, title, pageDescription } = meta;
-    const description = pageDescription.replace(/(<([^>]+)>)/gi, '');
+    const description = htmlToString(pageDescription);
     return {
         title: pageTitle,
         description: `${description} | ${title}`,

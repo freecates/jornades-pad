@@ -1,17 +1,27 @@
-import Link from "next/link"
+import Link from 'next/link';
 import { Inter } from 'next/font/google';
-import Blockquote from "./Blockquote"
-import SocialSharer from "./SocialSharer"
+import Blockquote from './Blockquote';
+import SocialSharer from './SocialSharer';
 
 import styles from '@/app/page.module.scss';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const Post = ({ title, author, date, excerpt, id, slug, content}) => {
+type Props = {
+    title: string;
+    author: string;
+    date: string;
+    excerpt: string;
+    id: string;
+    slug: string;
+    content: string;
+};
+
+const Post: React.FC<Props> = ({ title, author, date, excerpt, id, slug, content }) => {
     const type = 'blog';
     return (
         <>
-        <h1
+            <h1
                 className={`${inter.className}`}
                 dangerouslySetInnerHTML={{
                     __html: title,
@@ -39,7 +49,7 @@ const Post = ({ title, author, date, excerpt, id, slug, content}) => {
                 </small>
             </p>
         </>
-    )
-}
+    );
+};
 
 export default Post;
