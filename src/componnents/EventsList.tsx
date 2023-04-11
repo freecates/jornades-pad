@@ -52,6 +52,20 @@ const EventsList: React.FC<Props> = ({ events }) => {
                                 )}
                             </li>
                             <li>
+                                <strong>Participa-hi:</strong>{' '}
+                                {e.form ? (
+                                    <a
+                                        title={`Consultar: ${e.form}`}
+                                        href={e.form}
+                                        target='_blank'
+                                    >
+                                        [<span className={styles.up}>&#8593;</span>]
+                                    </a>
+                                ) : (
+                                    'properament'
+                                )}
+                            </li>
+                            <li>
                                 <AddToCalendarButtonWrapper
                                     name={`Jornades PAD - ${e.name}`}
                                     place={e.place}
