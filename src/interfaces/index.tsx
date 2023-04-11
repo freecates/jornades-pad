@@ -20,6 +20,7 @@ export interface IEvent {
     summary: string;
     startTime: string;
     bases: string;
+    form: string;
 }
 
 export interface IPost {
