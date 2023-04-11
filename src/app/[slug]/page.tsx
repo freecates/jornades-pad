@@ -8,6 +8,7 @@ import EventsList from '@/componnents/EventsList';
 import Blockquote from '@/componnents/Blockquote';
 
 import styles from '../page.module.scss';
+import slugPageStyles from '@/app/slugPage.module.scss';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,6 +21,10 @@ type SlugPageProps = {
             pads?: IEvent[];
             image?: string;
             excerpt?: string;
+            poster?: {
+                name: string;
+                url: string;
+            };
         };
     };
 };
@@ -31,15 +36,17 @@ export default async function SlugPage({ params }) {
     return (
         <>
             <div className={styles.content}>
-                <h1 className={`${inter.className} ${content.image ? styles.flex : ''}`}>{content.image ? 
-            <Image
-              src={`/${content.image}`}
-              alt={content.title}
-              className={styles.logo}
-              width={95}
-              height={95}
-              priority
-            /> : null }
+                <h1 className={`${inter.className} ${content.image ? styles.flex : ''}`}>
+                    {content.image ? (
+                        <Image
+                            src={`/${content.image}`}
+                            alt={content.title}
+                            className={styles.logo}
+                            width={95}
+                            height={95}
+                            priority
+                        />
+                    ) : null}
                     {content.title}
                 </h1>
                 {content?.mainContent ? (
@@ -50,9 +57,21 @@ export default async function SlugPage({ params }) {
                         }}
                     />
                 ) : null}
-                {content?.excerpt ? 
-                <Blockquote content={content?.excerpt} /> :
-                null}
+                {content?.poster ? (
+                    <ul className={`${inter.className} ${slugPageStyles.list}`}>
+                        <li>
+                            <strong>Cartell Jornades PAD:</strong>{' '}
+                            <a
+                                title={`Descarregar: ${content.poster.name}`}
+                                href={content.poster.url}
+                                download
+                            >
+                                [<span className={slugPageStyles.down}>&#8595;</span>]
+                            </a>
+                        </li>
+                    </ul>
+                ) : null}
+                {content?.excerpt ? <Blockquote content={content?.excerpt} /> : null}
                 {content?.pads ? (
                     <div className={inter.className}>
                         <EventsList events={content.pads} />
