@@ -18,7 +18,11 @@ const EventsList: React.FC<Props> = ({ events }) => {
                     <div className={styles.card} key={id}>
                         {events.length > 1 ? (
                             <Link href={`/les-jornades-pad/${e.route}`}>
-                                <h2 className={`${inter.className}  ${e.route ? styles[e.route] : ''}`}>
+                                <h2
+                                    className={`${inter.className}  ${
+                                        e.route ? styles[e.route] : ''
+                                    }`}
+                                >
                                     {e.name} <span className={styles.right}>-&gt;</span>
                                 </h2>
                             </Link>
@@ -33,7 +37,20 @@ const EventsList: React.FC<Props> = ({ events }) => {
                             <li>
                                 <strong>Quan:</strong> {dateToLocale(e.date, 'ca')}
                             </li>
-                            <li><strong>Bases:</strong> properament</li>
+                            <li>
+                                <strong>Bases:</strong>{' '}
+                                {e.bases ? (
+                                    <a
+                                        title={`Consultar: ${e.bases}`}
+                                        href={e.bases}
+                                        target='_blank'
+                                    >
+                                        [<span className={styles.up}>&#8593;</span>]
+                                    </a>
+                                ) : (
+                                    'properament'
+                                )}
+                            </li>
                             <li>
                                 <AddToCalendarButtonWrapper
                                     name={`Jornades PAD - ${e.name}`}

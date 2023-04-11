@@ -19,6 +19,7 @@ export interface IEvent {
     route: string;
     summary: string;
     startTime: string;
+    bases: string;
 }
 
 export interface IPost {
