@@ -1,0 +1,41 @@
+.list {
+    list-style-type: none;
+
+    span {
+        display: inline-block;
+        transition: transform 200ms;
+
+        &.up {
+            &:hover {
+                transform: translateY(-4px);
+            }
+        }
+
+        &.down {
+            &:hover {
+                transform: translateY(4px);
+            }
+        }
+    }
+
+    /* Enable hover only on non-touch devices */
+    @media (hover: hover) and (pointer: fine) {
+        span.up {
+            &:hover {
+                transform: translateY(-4px);
+            }
+        }
+
+        span.down {
+            &:hover {
+                transform: translateY(4px);
+            }
+        }
+    }
+
+    @media (prefers-reduced-motion) {
+        &:hover span {
+            transform: none;
+        }
+    }
+}
