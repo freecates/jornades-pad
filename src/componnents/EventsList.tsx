@@ -70,7 +70,7 @@ const EventsList: React.FC<Props> = ({ events }) => {
                                     name={`Jornades PAD - ${e.name}`}
                                     place={e.place}
                                     date={e.date}
-                                    calendars={['Google', 'iCal']}
+                                    calendars={['Google', 'iCal', 'Outlook.com']}
                                     organizer={'Adhoc Cultura|info@adhoc-cultura.com'}
                                     description={e.summary}
                                     startTime={e.startTime}
