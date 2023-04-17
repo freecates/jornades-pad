@@ -10,3 +10,15 @@
     background: rgb(190, 22, 34);
   }
 }
+
+.image-wrapper {
+  position: relative;
+  padding-bottom: 52%;
+  margin-bottom: 1rem;
+  width: 125%;
+  margin-left: -12.5%;
+  @media (min-width: 1200px) {
+    width: 115%;
+    margin-left: -7.5%;
+  }
+}
