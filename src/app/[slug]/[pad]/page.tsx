@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import api from '@/libs/api.js';
@@ -20,17 +21,28 @@ type PadPageProps = {
         startTime: string;
         bases: string;
         form: string;
+        image: string;
     };
 };
 
 export default async function PadPage({ params }) {
     const { slug, pad } = params;
     const { pageData }: PadPageProps = await getData(slug, pad);
-    const { name, place, map, date, summary, route, startTime, bases, form } = pageData;
+    const { name, place, map, date, summary, route, startTime, bases, form, image } = pageData;
     const event = [{name, place, map, route, date, summary, startTime, bases, form}];
     return (
         <>
             <div className={styles.content}>
+                <div className={padPageStyles['image-wrapper']}>
+                    <Image
+                        src={`/${image}`}
+                        alt={name}
+                        className={styles.adhocLogo}
+                        fill={true}
+                        priority
+                    />
+                </div>
+
                 <h1 className={`${inter.className} ${padPageStyles.title} ${route ? padPageStyles[route] : ''}`}>
                     {name}
                 </h1>
