@@ -49,6 +49,7 @@ export default async function SlugPage({ params }) {
                     ) : null}
                     {content.title}
                 </h1>
+                {content?.excerpt ? <Blockquote content={content?.excerpt} /> : null}
                 {content?.mainContent ? (
                     <div
                         className={inter.className}
@@ -71,7 +72,6 @@ export default async function SlugPage({ params }) {
                         </li>
                     </ul>
                 ) : null}
-                {content?.excerpt ? <Blockquote content={content?.excerpt} /> : null}
                 {content?.pads ? (
                     <div className={inter.className}>
                         <EventsList events={content.pads} />

@@ -1,5 +1,5 @@
 import api from '@/libs/api.js';
-import { IRoute } from '@/interfaces';
+import { IProducer, IRoute } from '@/interfaces';
 import type { Metadata } from 'next';
 import './globals.css';
 import styles from './layout.module.scss';
@@ -8,17 +8,27 @@ import Footer from '@/componnents/Footer';
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
     const {
         footer: { routes: footerLinks },
+        producers,
     }: {
         footer: {
             routes: IRoute[];
         };
+        producers: [
+            {
+                organizers: IProducer[];
+                participants: IProducer[];
+                supporters: IProducer[];
+                collaborators: IProducer[];
+                sponsors: IProducer[];
+            },
+        ];
     } = await getData();
     return (
         <html lang='ca'>
             <body>
                 <main className={styles.main}>
                     {children}
-                    <Footer footerLinks={footerLinks} />
+                    <Footer footerLinks={footerLinks} producers={producers} />
                 </main>
             </body>
         </html>
@@ -26,12 +36,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 }
 
 const getData = async () => {
-    const [footer] = await Promise.all([
+    const [footer, producers] = await Promise.all([
         api.padData.getData('footer'),
+        api.padData.getData('producers'),
     ]);
 
     return {
         footer: { ...footer[0] },
+        producers,
     };
 };
 
@@ -43,7 +55,7 @@ const generateMetadata = async (): Promise<Metadata> => {
         title: {
             default: pageTitle,
             template: `%s | ${pageTitle}`,
-          },
+        },
         description: pageDescription,
         alternates: {
             canonical: 'https://www.jornadespad.cat/',
