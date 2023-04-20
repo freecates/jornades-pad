@@ -65,10 +65,11 @@
     }
 
     /* Mobile and Tablet */
-    @media (max-width: 1023px) {
+    @media (max-width: 767px) {
         grid-template-columns: 1fr;
         margin-bottom: 60px;
         max-width: 320px;
+        margin: 0 auto;
         width: 100%;
 
         .card {

@@ -34,3 +34,10 @@ export interface IPost {
     };
     date: string;
 }
+
+export interface IProducer {
+    id: string;
+    type: string;
+    name: string;
+    url: string;
+}

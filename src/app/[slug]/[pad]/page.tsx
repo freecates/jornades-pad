@@ -7,6 +7,7 @@ import EventsList from '@/componnents/EventsList';
 
 import styles from '@/app/page.module.scss';
 import padPageStyles from '@/app/padPage.module.scss';
+import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -59,6 +60,12 @@ export default async function PadPage({ params }) {
                         <EventsList events={event} />
                     </div>
                 ) : null}
+                
+                <p className={inter.className}>
+                    <small>
+                        <Link href={'/les-jornades-pad'}>[tornar]</Link>
+                    </small>
+                </p>
                 
             </div>
         </>

@@ -1,0 +1,27 @@
+@import 'grid';
+
+.grid {
+    text-align: center;
+    grid-template-columns: 1fr;
+    .flex {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        div {
+            flex-basis: 25%;
+            margin: 1rem 0;
+        }
+    }
+}
+
+
+
+@media (prefers-color-scheme: dark) {
+    .adhocLogo {
+        filter: invert(1);
+    }
+
+    .logo {
+        filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
+    }
+}

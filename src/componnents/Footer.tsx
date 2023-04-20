@@ -1,17 +1,29 @@
 import { Inter } from 'next/font/google';
-import { IRoute } from '@/interfaces';
+import { IProducer, IRoute } from '@/interfaces';
 import styles from './Footer.module.scss';
 import Link from 'next/link';
+import ProducersGrid from './ProducersGrid';
 
 const inter = Inter({ subsets: ['latin'] });
 
 type Props = {
     footerLinks: IRoute[];
+    producers: [
+        {
+            organizers: IProducer[];
+            participants: IProducer[];
+            supporters: IProducer[];
+            collaborators: IProducer[];
+            sponsors: IProducer[];
+        },
+    ];
+
 };
 
-const Footer: React.FC<Props> = ({ footerLinks }) => {
+const Footer: React.FC<Props> = ({ footerLinks, producers }) => {
     return (
-        <>
+        <div className={styles['footer-wrapper']}>
+            <hr className={styles.hr}/>
             <div className={styles.grid}>
                 {footerLinks.map((f, id) =>
                     f.route ? (
@@ -31,7 +43,9 @@ const Footer: React.FC<Props> = ({ footerLinks }) => {
                     </small>
                 </p>
             </div>
-        </>
+            <hr className={styles.hr}/>
+            <ProducersGrid producers={producers} />
+        </div>
     );
 };
 
