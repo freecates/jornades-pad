@@ -25,7 +25,7 @@ const Header = () => {
                         alt='Adhoc Logo'
                         className={styles.adhocLogo}
                         width={100}
-                        height={52}
+                        height={65}
                         priority
                     />
                 </a>

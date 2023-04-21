@@ -35,7 +35,7 @@ export default async function Home() {
               alt="Adhoc Logo"
               className={styles.adhocLogo}
               width={100}
-              height={52}
+              height={65}
               priority
             />
           </a>
