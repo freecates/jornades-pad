@@ -2,11 +2,26 @@
 
 .grid {
     text-align: center;
-    grid-template-columns: 1fr;
+
+    @media (min-width: 768px) {
+
+        div {
+
+            &:first-child,
+            &:last-child,
+            &:nth-child(2) {
+
+                grid-column: span 2;
+            }
+        }
+    }
+
+
     .flex {
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
+
         div {
             flex-basis: 25%;
             margin: 1rem 0;
