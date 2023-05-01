@@ -20,6 +20,7 @@
     &.flex {
       display: flex;
       align-items: center;
+      justify-content: center;
     }
   }
 }
@@ -102,6 +103,22 @@
 
 .m-b-1 {
   margin-bottom: 1rem;
+}
+
+.image-wrapper {
+  position: relative;
+  padding-bottom: 67%;
+  margin-bottom: 1rem;
+  width: 120%;
+  margin-left: -10%;
+  @media (min-width: 768px) {
+    width: 115%;
+    margin-left: -7.5%;
+  }
+  img {
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
 }
 
 /* Mobile and Tablet */

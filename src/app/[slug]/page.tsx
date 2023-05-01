@@ -20,6 +20,7 @@ type SlugPageProps = {
             mainContent?: string;
             pads?: IEvent[];
             image?: string;
+            icon?: string;
             excerpt?: string;
             poster?: {
                 name: string;
@@ -36,10 +37,21 @@ export default async function SlugPage({ params }) {
     return (
         <>
             <div className={styles.content}>
-                <h1 className={`${inter.className} ${content.image ? styles.flex : ''}`}>
-                    {content.image ? (
+                {content.image ? (
+                    <div className={styles['image-wrapper']}>
                         <Image
                             src={`/${content.image}`}
+                            alt={content.title}
+                            className={styles.adhocLogo}
+                            fill={true}
+                            priority
+                        />
+                    </div>
+                ) : null}
+                <h1 className={`${inter.className} ${content.icon ? styles.flex : ''}`}>
+                    {content.icon ? (
+                        <Image
+                            src={`/${content.icon}`}
                             alt={content.title}
                             className={styles.logo}
                             width={95}
