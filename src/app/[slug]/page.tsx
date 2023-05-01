@@ -38,7 +38,7 @@ export default async function SlugPage({ params }) {
         <>
             <div className={styles.content}>
                 {content.image ? (
-                    <div className={slugPageStyles['image-wrapper']}>
+                    <div className={styles['image-wrapper']}>
                         <Image
                             src={`/${content.image}`}
                             alt={content.title}

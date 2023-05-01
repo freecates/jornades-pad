@@ -34,7 +34,7 @@ export default async function PadPage({ params }) {
     return (
         <>
             <div className={styles.content}>
-                <div className={padPageStyles['image-wrapper']}>
+                <div className={styles['image-wrapper']}>
                     <Image
                         src={`/${image}`}
                         alt={name}
