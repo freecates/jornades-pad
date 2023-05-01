@@ -6,7 +6,7 @@ import { htmlToString } from '@/utils/htmlToString';
 import EventsList from '@/componnents/EventsList';
 
 import styles from '@/app/page.module.scss';
-import padPageStyles from '@/app/padPage.module.scss';
+import padPageStyles from './padPage.module.scss';
 import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -34,7 +34,7 @@ export default async function PadPage({ params }) {
     return (
         <>
             <div className={styles.content}>
-                <div className={styles['image-wrapper']}>
+                <div className={padPageStyles['image-wrapper']}>
                     <Image
                         src={`/${image}`}
                         alt={name}

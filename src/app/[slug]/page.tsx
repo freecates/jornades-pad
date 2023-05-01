@@ -7,8 +7,8 @@ import { IMeta, IEvent } from '@/interfaces';
 import EventsList from '@/componnents/EventsList';
 import Blockquote from '@/componnents/Blockquote';
 
-import styles from '../page.module.scss';
-import slugPageStyles from '@/app/slugPage.module.scss';
+import styles from '@/app/page.module.scss';
+import slugPageStyles from './slugPage.module.scss';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -38,9 +38,7 @@ export default async function SlugPage({ params }) {
         <>
             <div className={styles.content}>
                 {content.image ? (
-                    <div
-                        className={`${styles['image-wrapper']} ${slugPageStyles['image-wrapper']}`}
-                    >
+                    <div className={`${slugPageStyles['image-wrapper']}`}>
                         <Image src={`/${content.image}`} alt={content.title} fill={true} priority />
                     </div>
                 ) : null}
