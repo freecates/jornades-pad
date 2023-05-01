@@ -38,13 +38,10 @@ export default async function SlugPage({ params }) {
         <>
             <div className={styles.content}>
                 {content.image ? (
-                    <div className={styles['image-wrapper']}>
-                        <Image
-                            src={`/${content.image}`}
-                            alt={content.title}
-                            fill={true}
-                            priority
-                        />
+                    <div
+                        className={`${styles['image-wrapper']} ${slugPageStyles['image-wrapper']}`}
+                    >
+                        <Image src={`/${content.image}`} alt={content.title} fill={true} priority />
                     </div>
                 ) : null}
                 <h1 className={`${inter.className} ${content.icon ? styles.flex : ''}`}>
