@@ -20,7 +20,7 @@ const PostsPage = async () => {
 };
 
 const getData = async () => {
-    const posts = await api.wpData.getData('posts', 100, null, 23);
+    const posts = await api.wpData.getData('posts', 100, null, 23, 30);
 
     if (!posts.data) {
         return { posts };

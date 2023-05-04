@@ -10,14 +10,14 @@ const api = {
         },
     },
     wpData: {
-        async getData(type, amount, id, category) {
+        async getData(type, amount, id, category, revalidate) {
             const response = await fetch(
                 `${wordPressApiUrl}/wp/v2/${type}${id ? '/' + id : ''}?${
                     amount ? 'per_page=' + amount + '&' : ''
                 }${
                     category ? '&' + 'categories=' + category + '&' : ''
                 }_embed`,
-                { next: { revalidate: 60 } },
+                { next: { revalidate: revalidate } },
             );
             const data = await response.json();
             return data;

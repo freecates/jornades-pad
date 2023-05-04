@@ -64,7 +64,7 @@ const PostPad = async ({ params }) => {
 };
 
 const getData = async (params) => {
-    const post = await api.wpData.getData('posts', null, params.id, null);
+    const post = await api.wpData.getData('posts', null, params.id, null, 30);
 
     if (!post.data) {
         return { post };
@@ -74,7 +74,7 @@ const getData = async (params) => {
 };
 
 export async function generateStaticParams() {
-    const posts = await api.wpData.getData('posts', 100, null, 23);
+    const posts = await api.wpData.getData('posts', 100, null, 23, 30);
     const staticParamsPosts = posts.map((post: { id: number; slug: string }) => ({
         id: `${post.id}`,
         slug: post.slug,
@@ -83,7 +83,7 @@ export async function generateStaticParams() {
 }
 
 const generateMetadata = async ({ params }): Promise<Metadata> => {
-    const post = await api.wpData.getData('posts', null, params.id, null);
+    const post = await api.wpData.getData('posts', null, params.id, null, 30);
     if (!post) return { title: 'Not Found' };
     const pageTitle = post?.title?.rendered;
     const pageDescription = htmlToString(post?.excerpt?.rendered).substring(0, 240);
@@ -118,8 +118,6 @@ const generateMetadata = async ({ params }): Promise<Metadata> => {
 };
 
 export const dynamicParams = true;
-
-export const revalidate = 30;
 
 export { generateMetadata };
 export default PostPad;
