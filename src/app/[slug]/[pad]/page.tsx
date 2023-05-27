@@ -23,14 +23,15 @@ type PadPageProps = {
         bases: string;
         form: string;
         image: string;
+        program: string;
     };
 };
 
 export default async function PadPage({ params }) {
     const { slug, pad } = params;
     const { pageData }: PadPageProps = await getData(slug, pad);
-    const { name, place, map, date, summary, route, startTime, bases, form, image } = pageData;
-    const event = [{name, place, map, route, date, summary, startTime, bases, form}];
+    const { name, place, map, date, summary, route, startTime, bases, form, image, program } = pageData;
+    const event = [{name, place, map, route, date, summary, startTime, bases, form, program }];
     return (
         <>
             <div className={styles.content}>

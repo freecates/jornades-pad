@@ -38,6 +38,20 @@ const EventsList: React.FC<Props> = ({ events }) => {
                                 <strong>Quan:</strong> {dateToLocale(e.date, 'ca')}
                             </li>
                             <li>
+                                <strong>Programa:</strong>{' '}
+                                {e.program ? (
+                                    <a
+                                        title={`Descarregar: ${e.program}`}
+                                        href={e.program}
+                                        download
+                                    >
+                                        [<span className={styles.down}>&#8595;</span>]
+                                    </a>
+                                ) : (
+                                    'properament'
+                                )}
+                            </li>
+                            <li>
                                 <strong>Bases:</strong>{' '}
                                 {e.bases ? (
                                     <a

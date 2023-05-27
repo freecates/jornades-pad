@@ -21,6 +21,7 @@ export interface IEvent {
     startTime: string;
     bases: string;
     form: string;
+    program: string;
 }
 
 export interface IPost {
