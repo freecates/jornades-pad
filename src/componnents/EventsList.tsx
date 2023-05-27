@@ -42,7 +42,7 @@ const EventsList: React.FC<Props> = ({ events }) => {
                                 {e.program ? (
                                     <a
                                         title={`Descarregar: ${e.program}`}
-                                        href={e.program}
+                                        href={`/${e.program}`}
                                         download
                                     >
                                         [<span className={styles.down}>&#8595;</span>]
