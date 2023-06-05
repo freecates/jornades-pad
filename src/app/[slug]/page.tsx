@@ -26,6 +26,10 @@ type SlugPageProps = {
                 name: string;
                 url: string;
             };
+            instagram?: {
+                url: string;
+                name: string;
+            };
         };
     };
 };
@@ -53,7 +57,11 @@ export default async function SlugPage({ params }) {
                             priority
                         />
                     ) : null}
-                    {content.title}
+                    {content.instagram ?
+                        <span className={slugPageStyles.grid}>{content.title}
+                        <small><a href={content.instagram.url} target='_blank'title={content.instagram.name}>@{content.instagram.name}</a></small></span>
+                     : 
+                     content.title}
                 </h1>
                 {content?.excerpt ? <Blockquote content={content?.excerpt} /> : null}
                 {content?.mainContent ? (
