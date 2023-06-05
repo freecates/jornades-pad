@@ -59,8 +59,7 @@ export default async function SlugPage({ params }) {
                     ) : null}
                     {content.instagram ?
                         <span className={slugPageStyles.grid}>{content.title}
-                        <small><a href={content.instagram.url} target='_blank'title={content.instagram.name}>@{content.instagram.name}</a></small></span>
-                     : 
+                        <small><a href={content.instagram.url} target='_blank'title={content.instagram.name}>@{content.instagram.name}</a></small></span> : 
                      content.title}
                 </h1>
                 {content?.excerpt ? <Blockquote content={content?.excerpt} /> : null}
