@@ -1,9 +1,10 @@
 import { Inter } from 'next/font/google';
 import { IEvent } from '@/interfaces';
 import { dateToLocale } from '@/utils/dateToLocale';
-import styles from './EventsList.module.scss';
 import AddToCalendarButtonWrapper from './AddToCalendarButtonWrapper';
 import Link from 'next/link';
+
+import styles from './EventsList.module.scss';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,7 +16,7 @@ const EventsList: React.FC<Props> = ({ events }) => {
         <div className={styles.grid}>
             {events.map((e, id) =>
                 e.name ? (
-                    <div className={styles.card} key={id}>
+                    <div className={`${styles.card} ${e.isCancelled ? styles.cancelled : ''}`} key={id}>
                         {events.length > 1 ? (
                             <Link href={`/les-jornades-pad/${e.route}`}>
                                 <h2
@@ -23,10 +24,11 @@ const EventsList: React.FC<Props> = ({ events }) => {
                                         e.route ? styles[e.route] : ''
                                     }`}
                                 >
-                                    {e.name} <span className={styles.right}>-&gt;</span>
+                                    {e.name} <span className={styles.right}>-&gt;</span> 
                                 </h2>
                             </Link>
                         ) : null}
+                        {e.isCancelled ? <span><small>[CANCEL·LAT]</small></span> : null}
                         <ul className={inter.className}>
                             <li>
                                 <strong>On:</strong> {e.place}{' '}

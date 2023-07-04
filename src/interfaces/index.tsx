@@ -22,6 +22,7 @@ export interface IEvent {
     bases: string;
     form: string;
     program: string;
+    isCancelled: boolean;
 }
 
 export interface IPost {
