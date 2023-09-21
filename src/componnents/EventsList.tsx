@@ -9,9 +9,9 @@ import styles from './EventsList.module.scss';
 const inter = Inter({ subsets: ['latin'] });
 
 const calendars: ('Apple' | 'Google' | 'iCal' | 'Microsoft365' | 'MicrosoftTeams' | 'Outlook.com' | 'Yahoo')[] = [
-    'Apple',    // Apple Calendar
-    'Google',   // Google Calendar
-    'iCal',     // iCalendar
+    "Apple",    // Apple Calendar
+    "Google",   // Google Calendar
+    "iCal",     // iCalendar
 ]
 
 type Props = {

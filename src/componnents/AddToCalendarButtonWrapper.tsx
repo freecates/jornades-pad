@@ -16,7 +16,7 @@ const AddToCalendarButtonWrapper: React.FC<Props> = ({ name, place, date, calend
         <div className='add-to-calendar-button-wrapper'>
             <AddToCalendarButton
                 name={name}
-                options={calendars}
+                options={(calendars)}
                 location={place}
                 description={description}
                 startDate={date}
