@@ -8,6 +8,12 @@ import styles from './EventsList.module.scss';
 
 const inter = Inter({ subsets: ['latin'] });
 
+const calendars: ('Apple' | 'Google' | 'iCal' | 'Microsoft365' | 'MicrosoftTeams' | 'Outlook.com' | 'Yahoo')[] = [
+    "Apple",    // Apple Calendar
+    "Google",   // Google Calendar
+    "iCal",     // iCalendar
+]
+
 type Props = {
     events: IEvent[];
 };
@@ -86,7 +92,7 @@ const EventsList: React.FC<Props> = ({ events }) => {
                                     name={`Jornades PAD - ${e.name}`}
                                     place={e.place}
                                     date={e.date}
-                                    calendars={['Google', 'iCal', 'Outlook.com']}
+                                    calendars={calendars}
                                     organizer={'Adhoc Cultura|info@adhoc-cultura.com'}
                                     description={e.summary}
                                     startTime={e.startTime}
