@@ -5,7 +5,7 @@ type Props = {
     name: string;
     place: string;
     date: string;
-    calendars: string[];
+    calendars: ('Apple' | 'Google' | 'iCal' | 'Microsoft365' | 'MicrosoftTeams' | 'Outlook.com' | 'Yahoo')[];
     organizer: string;
     description: string;
     startTime: string;
