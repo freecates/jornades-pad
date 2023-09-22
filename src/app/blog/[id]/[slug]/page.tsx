@@ -4,6 +4,7 @@ import { NewsArticle, WithContext } from 'schema-dts';
 import api from '@/libs/api.js';
 import { dateToLocale } from '@/utils/dateToLocale';
 import { htmlToString } from '@/utils/htmlToString';
+import { htmlEntityToString } from '@/utils/htmlEntityToString';
 
 import styles from '@/app/page.module.scss';
 import Post from '@/componnents/Post';
@@ -88,7 +89,7 @@ const generateMetadata = async ({ params }): Promise<Metadata> => {
     const pageTitle = post?.title?.rendered;
     const pageDescription = htmlToString(post?.excerpt?.rendered).substring(0, 240);
     return {
-        title: pageTitle,
+        title: htmlEntityToString(pageTitle),
         description: `${pageDescription}`,
         alternates: {
             canonical: `https://www.jornadespad.cat/blog/${post.id}/${post.slug}`,
