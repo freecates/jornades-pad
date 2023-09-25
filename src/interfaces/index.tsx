@@ -20,6 +20,7 @@ export interface IEvent {
     summary: string;
     startTime: string;
     bases: string;
+    localBases: string;
     form: string;
     program: string;
     isCancelled: boolean;

@@ -22,7 +22,10 @@ const EventsList: React.FC<Props> = ({ events }) => {
         <div className={styles.grid}>
             {events.map((e, id) =>
                 e.name ? (
-                    <div className={`${styles.card} ${e.isCancelled ? styles.cancelled : ''}`} key={id}>
+                    <div
+                        className={`${styles.card} ${e.isCancelled ? styles.cancelled : ''}`}
+                        key={id}
+                    >
                         {events.length > 1 ? (
                             <Link href={`/les-jornades-pad/${e.route}`}>
                                 <h2
@@ -30,11 +33,15 @@ const EventsList: React.FC<Props> = ({ events }) => {
                                         e.route ? styles[e.route] : ''
                                     }`}
                                 >
-                                    {e.name} <span className={styles.right}>-&gt;</span> 
+                                    {e.name} <span className={styles.right}>-&gt;</span>
                                 </h2>
                             </Link>
                         ) : null}
-                        {e.isCancelled ? <span><small>[CANCEL·LAT]</small></span> : null}
+                        {e.isCancelled ? (
+                            <span>
+                                <small>[CANCEL·LAT]</small>
+                            </span>
+                        ) : null}
                         <ul className={inter.className}>
                             <li>
                                 <strong>On:</strong> {e.place}{' '}
@@ -73,14 +80,22 @@ const EventsList: React.FC<Props> = ({ events }) => {
                                     'properament'
                                 )}
                             </li>
+                            {e.localBases ? (
+                                <li>
+                                    <strong>Bases artistes locals:</strong>{' '}
+                                    <a
+                                        title={`Consultar: ${e.localBases}`}
+                                        href={e.localBases}
+                                        target='_blank'
+                                    >
+                                        [<span className={styles.up}>&#8593;</span>]
+                                    </a>
+                                </li>
+                            ) : null}
                             <li>
                                 <strong>Participa-hi:</strong>{' '}
                                 {e.form ? (
-                                    <a
-                                        title={`Consultar: ${e.form}`}
-                                        href={e.form}
-                                        target='_blank'
-                                    >
+                                    <a title={`Consultar: ${e.form}`} href={e.form} target='_blank'>
                                         [<span className={styles.up}>&#8593;</span>]
                                     </a>
                                 ) : (
