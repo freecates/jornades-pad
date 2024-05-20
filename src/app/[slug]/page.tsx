@@ -87,13 +87,17 @@ export default async function SlugPage({ params }) {
                     <ul className={`${inter.className} ${slugPageStyles.list}`}>
                         <li>
                             <strong>{content.poster.name}:</strong>{' '}
-                            <a
-                                title={`Descarregar: ${content.poster.name}`}
-                                href={content.poster.url}
-                                download
-                            >
-                                [<span className={slugPageStyles.down}>&#8595;</span>]
-                            </a>
+                            {content.poster.url ? (
+                                <a
+                                    title={`Descarregar: ${content.poster.name}`}
+                                    href={content.poster.url}
+                                    download
+                                >
+                                    [<span className={slugPageStyles.down}>&#8595;</span>]
+                                </a>
+                            ) : (
+                                'properament'
+                            )}
                         </li>
                     </ul>
                 ) : null}
