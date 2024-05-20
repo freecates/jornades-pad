@@ -31,7 +31,6 @@ const Footer: React.FC<Props> = ({ footerLinks, producers }) => {
                             <h2 className={inter.className}>
                                 {f.name} <span>-&gt;</span>
                             </h2>
-                            <p className={inter.className}>{f.description}</p>
                         </Link>
                     ) : null,
                 )}

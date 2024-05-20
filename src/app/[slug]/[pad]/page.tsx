@@ -111,7 +111,7 @@ const generateMetadata = async ({ params }): Promise<Metadata> => {
 export const generateStaticParams = async () => {
     return [
         { slug: 'les-jornades-pad', pad: 'pad-3dt' },
-        { slug: 'les-jornades-pad', pad: 'pad-espiga-t' },
+        { slug: 'les-jornades-pad', pad: 'pad-terra' },
         { slug: 'les-jornades-pad', pad: 'pad-mev' },
         { slug: 'les-jornades-pad', pad: 'pad-fida' },
     ];
