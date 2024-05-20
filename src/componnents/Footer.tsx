@@ -36,9 +36,7 @@ const Footer: React.FC<Props> = ({ footerLinks, producers }) => {
                 )}
                 <p className={`${inter.className} ${styles['blog-route']}`}>
                     <small>
-                        <Link href={'/blog'}>
-                            [blog]
-                        </Link>
+                        <code>Impulsem l'art digital, la co-creació i els i les artistes emergents a partir de les col·leccions dels museus. Participa del PAD!</code>
                     </small>
                 </p>
             </div>

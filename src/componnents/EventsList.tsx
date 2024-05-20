@@ -49,9 +49,17 @@ const EventsList: React.FC<Props> = ({ events }) => {
                                     [<span className={styles.up}>&#8593;</span>]
                                 </a>
                             </li>
-                            <li>
-                                <strong>Quan:</strong> {dateToLocale(e.date, 'ca')}
-                            </li>
+                            {e?.date ? (
+                                <li>
+                                    <strong>Quan:</strong> {dateToLocale(e.date, 'ca')}
+                                </li>
+                            ) : null}
+
+                            {e?.when ? (
+                                <li>
+                                    <strong>Quan:</strong> {e.when}
+                                </li>
+                            ) : null}
                             <li>
                                 <strong>Programa:</strong>{' '}
                                 {e.program ? (

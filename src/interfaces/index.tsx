@@ -16,6 +16,7 @@ export interface IEvent {
     place: string;
     map: string;
     date: string;
+    when: string;
     route: string;
     summary: string;
     startTime: string;
