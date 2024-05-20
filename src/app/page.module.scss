@@ -190,3 +190,23 @@
     transform: rotate(0deg);
   }
 }
+
+.wrapperVideo {
+  @media (min-width: 768px) {
+      position: relative;
+  }
+  @media (min-width: 1680px) {
+      width: 1680px;
+      margin: 0 auto;
+  }
+
+  .video {
+      max-width: 100%;
+      height: auto;
+
+      @media (min-width: 1680px) {
+          width: 1680px;
+          margin: 0 auto;
+      }
+  }
+}

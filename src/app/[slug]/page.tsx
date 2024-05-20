@@ -57,10 +57,22 @@ export default async function SlugPage({ params }) {
                             priority
                         />
                     ) : null}
-                    {content.instagram ?
-                        <span className={slugPageStyles.grid}>{content.title}
-                        <small><a href={content.instagram.url} target='_blank'title={content.instagram.name}>@{content.instagram.name}</a></small></span> : 
-                     content.title}
+                    {content.instagram ? (
+                        <span className={slugPageStyles.grid}>
+                            {content.title}
+                            <small>
+                                <a
+                                    href={content.instagram.url}
+                                    target='_blank'
+                                    title={content.instagram.name}
+                                >
+                                    @{content.instagram.name}
+                                </a>
+                            </small>
+                        </span>
+                    ) : (
+                        content.title
+                    )}
                 </h1>
                 {content?.excerpt ? <Blockquote content={content?.excerpt} /> : null}
                 {content?.mainContent ? (
@@ -74,7 +86,7 @@ export default async function SlugPage({ params }) {
                 {content?.poster ? (
                     <ul className={`${inter.className} ${slugPageStyles.list}`}>
                         <li>
-                            <strong>Cartell Jornades PAD:</strong>{' '}
+                            <strong>{content.poster.name}:</strong>{' '}
                             <a
                                 title={`Descarregar: ${content.poster.name}`}
                                 href={content.poster.url}
@@ -125,7 +137,7 @@ const generateMetadata = async ({ params }): Promise<Metadata> => {
 };
 
 export const generateStaticParams = async () => {
-    return [{ slug: 'el-pad' }, { slug: 'la-nut' }, { slug: 'les-jornades-pad' }];
+    return [{ slug: 'el-pad' }, { slug: 'el-pad-social' }, { slug: 'les-jornades-pad' }];
 };
 
 export const dynamicParams = false;

@@ -1,9 +1,10 @@
-import api from '@/libs/api.js';
+import Footer from '@/componnents/Footer';
+import Header from '@/componnents/Header';
 import { IProducer, IRoute } from '@/interfaces';
+import api from '@/libs/api.js';
 import type { Metadata } from 'next';
 import './globals.css';
 import styles from './layout.module.scss';
-import Footer from '@/componnents/Footer';
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
     const {
@@ -27,6 +28,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <html lang='ca'>
             <body>
                 <main className={styles.main}>
+                    <Header />
                     {children}
                     <Footer footerLinks={footerLinks} producers={producers} />
                 </main>
