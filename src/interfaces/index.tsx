@@ -25,7 +25,7 @@ export interface IEvent {
     form: string;
     program: string;
     isCancelled: boolean;
-    isClosed: boolean;
+    isClosed?: boolean;
 }
 
 export interface IPost {
