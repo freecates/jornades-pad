@@ -9,22 +9,22 @@ import { htmlEntityToString } from '@/utils/htmlEntityToString';
 import styles from '@/app/page.module.scss';
 import Post from '@/componnents/Post';
 
-const imageMetaData = '/jornades-pad-1024.png';
-
 const PostPad = async ({ params }) => {
-    const { post } = await getData(params);
-    const pageTitle = post?.title?.rendered;
-    const content = post?.content?.rendered;
-    const author = post?.['_embedded'].author[0]?.name;
-    const date = dateToLocale(post?.date, 'ca');
-    const excerpt = post?.acf?.destacat;
+    const { activitat } = await getData(params);
+    const imageMetaData = activitat?.acf?.imatge_de_lactivitat.url;
+    const pageTitle = activitat?.title?.rendered;
+    const content = activitat?.acf?.descripcio_de_lactivitat;
+    const author = activitat?.['_embedded'].author[0]?.name;
+    const place = activitat?.acf?.localitzacio_de_lactivitat;
+    const date = dateToLocale(activitat?.acf?.data_de_lactivitat, 'ca');
+    // const excerpt = activitat?.acf?.destacat;
 
     const jsonLd: WithContext<NewsArticle> = {
         '@context': 'https://schema.org',
         '@type': 'NewsArticle',
         mainEntityOfPage: {
             '@type': 'WebPage',
-            '@id': `https://www.jornadespad.cat/blog/${post.id}/${post.slug}`,
+            '@id': `https://www.jornadespad.cat/activitats/${activitat.id}/${activitat.slug}`,
         },
         author: {
             '@type': 'Person',
@@ -39,69 +39,71 @@ const PostPad = async ({ params }) => {
             },
         },
         description: `${htmlToString(content)?.substring(0, 240)}...`,
-        image: `https://www.jornadespad.cat${imageMetaData}`,
-        datePublished: post?.date,
+        image: imageMetaData,
+        datePublished: activitat?.date,
         headline: pageTitle,
     };
 
     return (
         <div className={styles.content}>
             <Script
-                id={post.id}
+                id={activitat.id}
                 type='application/ld+json'
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
             <Post
                 content={content}
-                id={post.id}
-                slug={post.slug}
+                id={activitat.id}
+                slug={activitat.slug}
                 date={date}
-                author={author}
-                excerpt={excerpt}
+                author={place}
+                excerpt={`${date} ${place}`}   
                 title={pageTitle}
-                type={post.type}
+                type={activitat.type}
+                imageURL={imageMetaData}
             />
         </div>
     );
 };
 
 const getData = async (params) => {
-    const post = await api.wpData.getData('posts', null, params.id, null, 30);
+    const activitat = await api.wpData.getData('activitats', null, params.id, null, 30);
 
-    if (!post.data) {
-        return { post };
+    if (!activitat.data) {
+        return { activitat };
     } else {
-        return { post: null };
+        return { activitat: null };
     }
 };
 
 export async function generateStaticParams() {
-    const posts = await api.wpData.getData('posts', 100, null, 23, 30);
-    const staticParamsPosts = posts.map((post: { id: number; slug: string }) => ({
-        id: `${post.id}`,
-        slug: post.slug,
+    const activitats = await api.wpData.getData('activitats', 100, null, 23, 30);
+    const staticParamsPosts = activitats.map((activitat: { id: number; slug: string }) => ({
+        id: `${activitat.id}`,
+        slug: activitat.slug,
     }));
     return [...staticParamsPosts];
 }
 
 const generateMetadata = async ({ params }): Promise<Metadata> => {
-    const post = await api.wpData.getData('posts', null, params.id, null, 30);
-    if (!post) return { title: 'Not Found' };
-    const pageTitle = post?.title?.rendered;
-    const pageDescription = htmlToString(post?.excerpt?.rendered)?.substring(0, 240);
+    const activitat = await api.wpData.getData('activitats', null, params.id, null, 30);
+    if (!activitat) return { title: 'Not Found' };
+    const imageMetaData = activitat?.acf?.imatge_de_lactivitat.url;
+    const pageTitle = activitat?.title?.rendered;
+    const pageDescription = htmlToString(activitat?.excerpt?.rendered)?.substring(0, 240);
     return {
         title: htmlEntityToString(pageTitle),
         description: `${pageDescription}`,
         alternates: {
-            canonical: `https://www.jornadespad.cat/blog/${post.id}/${post.slug}`,
+            canonical: `https://www.jornadespad.cat/activitats/${activitat.id}/${activitat.slug}`,
         },
         openGraph: {
             title: pageTitle,
             description: `${pageDescription}...`,
-            url: `https://www.jornadespad.cat/blog/${post.id}/${post.slug}`,
+            url: `https://www.jornadespad.cat/activitats/${activitat.id}/${activitat.slug}`,
             images: [
                 {
-                    url: `https://www.jornadespad.cat${imageMetaData}`,
+                    url:imageMetaData,
                     width: 1024,
                     height: 1024,
                 },
@@ -114,7 +116,7 @@ const generateMetadata = async ({ params }): Promise<Metadata> => {
             description: `${pageDescription}...`,
             site: '@AdhocCultura',
             creator: 'Adhoc Cultura',
-            images: [`https://www.jornadespad.cat${imageMetaData}`],
+            images: [imageMetaData],
         },
     };
 };

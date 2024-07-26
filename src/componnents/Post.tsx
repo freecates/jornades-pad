@@ -4,6 +4,7 @@ import Blockquote from './Blockquote';
 import SocialSharer from './SocialSharer';
 
 import styles from '@/app/page.module.scss';
+import Image from 'next/image';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,10 +16,21 @@ type Props = {
     id: string;
     slug: string;
     content: string;
+    type: string;
+    imageURL?: string;
 };
 
-const Post: React.FC<Props> = ({ title, author, date, excerpt, id, slug, content }) => {
-    const type = 'blog';
+const Post: React.FC<Props> = ({
+    title,
+    author,
+    date,
+    excerpt,
+    id,
+    slug,
+    content,
+    type,
+    imageURL,
+}) => {
     return (
         <>
             <h1
@@ -32,7 +44,17 @@ const Post: React.FC<Props> = ({ title, author, date, excerpt, id, slug, content
                     {author} | {date}
                 </small>
             </p>
-            <SocialSharer type={type} id={id} slug={slug} title={title} />
+            <SocialSharer
+                type={type === 'post' ? 'blog' : type}
+                id={id}
+                slug={slug}
+                title={title}
+            />
+            {imageURL && (
+                <div className={styles['image-wrapper']}>
+                    <Image src={imageURL} alt={title} fill={true} priority />
+                </div>
+            )}
             <Blockquote content={excerpt} />
             {content ? (
                 <div
@@ -42,10 +64,15 @@ const Post: React.FC<Props> = ({ title, author, date, excerpt, id, slug, content
                     }}
                 />
             ) : null}
-            <SocialSharer type={type} id={id} slug={slug} title={title} />
+            <SocialSharer
+                type={type === 'post' ? 'blog' : type}
+                id={id}
+                slug={slug}
+                title={title}
+            />
             <p className={inter.className}>
                 <small>
-                    <Link href={'/blog'}>[tornar]</Link>
+                    <Link href={`/${type === 'post' ? 'blog' : type}`}>[tornar]</Link>
                 </small>
             </p>
         </>

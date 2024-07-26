@@ -15,7 +15,7 @@ const PostsList: React.FC<Props> = ({ posts }) => {
             {posts.map((p, id) =>
                 p.id ? (
                     <div className={styles.card} key={id}>
-                        <Link href={`/blog/${p.id}/${p.slug}`}>
+                        <Link href={`/${p.type !== 'post' ? p.type : 'blog'}/${p.id}/${p.slug}`}>
                             <h2
                                 className={`${inter.className}`}
                                 dangerouslySetInnerHTML={{
@@ -23,11 +23,14 @@ const PostsList: React.FC<Props> = ({ posts }) => {
                                 }}
                             />
                         </Link>
-                        <p className={inter.className}>
-                            <small>
-                                {p?.['_embedded'].author[0]?.name} | {dateToLocale(p?.date, 'ca')}
-                            </small>
-                        </p>
+                        {p.type === 'post' && (
+                            <p className={inter.className}>
+                                <small>
+                                    {p?.['_embedded'].author[0]?.name} |{' '}
+                                    {dateToLocale(p?.date, 'ca')}
+                                </small>
+                            </p>
+                        )}
                     </div>
                 ) : null,
             )}

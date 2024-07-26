@@ -38,6 +38,8 @@ export interface IPost {
         author: [{ name: string }];
     };
     date: string;
+    type: string;
+    imageURL?: string;
 }
 
 export interface IProducer {

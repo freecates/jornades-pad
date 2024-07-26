@@ -1,3 +1,5 @@
+@import '/src/app/mixins';
+
 .content {
   max-width: 64rem;
   width: 100%;
@@ -209,4 +211,8 @@
           margin: 0 auto;
       }
   }
+}
+
+.image-wrapper {
+  @include image-wrapper;
 }

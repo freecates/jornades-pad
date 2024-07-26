@@ -1,3 +1,3 @@
-const htmlToString = (string: string) => string.replace(/(<([^>]+)>)/gi, '');
+const htmlToString = (string: string) => string?.replace(/(<([^>]+)>)/gi, '');
 
 export { htmlToString };
