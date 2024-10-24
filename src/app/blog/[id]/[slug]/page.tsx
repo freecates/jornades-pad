@@ -11,7 +11,8 @@ import Post from '@/componnents/Post';
 
 const imageMetaData = '/jornades-pad-1024.png';
 
-const PostPad = async ({ params }) => {
+const PostPad = async props => {
+    const params = await props.params;
     const { post } = await getData(params);
     const pageTitle = post?.title?.rendered;
     const content = post?.content?.rendered;
@@ -83,7 +84,8 @@ export async function generateStaticParams() {
     return [...staticParamsPosts];
 }
 
-const generateMetadata = async ({ params }): Promise<Metadata> => {
+const generateMetadata = async (props): Promise<Metadata> => {
+    const params = await props.params;
     const post = await api.wpData.getData('posts', null, params.id, null, 30);
     if (!post) return { title: 'Not Found' };
     const pageTitle = post?.title?.rendered;

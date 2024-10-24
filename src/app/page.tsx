@@ -2,6 +2,8 @@ import Video from '@/componnents/Video';
 import api from '@/libs/api.js';
 import styles from './page.module.scss';
 
+import type { JSX } from "react";
+
 type HomeProps = {
     home: {
         content: {

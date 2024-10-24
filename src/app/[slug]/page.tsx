@@ -34,7 +34,8 @@ type SlugPageProps = {
     };
 };
 
-export default async function SlugPage({ params }) {
+export default async function SlugPage(props) {
+    const params = await props.params;
     const { slug } = params;
     const { pageData }: SlugPageProps = await getData(slug);
     const { content } = pageData;
@@ -121,7 +122,8 @@ const getData = async (slug: string) => {
     };
 };
 
-const generateMetadata = async ({ params }): Promise<Metadata> => {
+const generateMetadata = async (props): Promise<Metadata> => {
+    const params = await props.params;
     const { slug } = params;
     const camelCased = slug.replace(/-([a-z])/g, function (g) {
         return g[1].toUpperCase();

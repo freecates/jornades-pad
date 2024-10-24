@@ -1,5 +1,7 @@
 import styles from './Video.module.scss';
 
+import type { JSX } from "react";
+
 const staticDataUrl = 'https://jornades-pad-data.vercel.app/static';
 
 type VideoProps = {
