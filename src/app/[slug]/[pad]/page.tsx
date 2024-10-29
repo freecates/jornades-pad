@@ -31,7 +31,8 @@ type PadPageProps = {
     };
 };
 
-export default async function PadPage({ params }) {
+export default async function PadPage(props) {
+    const params = await props.params;
     const { slug, pad } = params;
     const { pageData }: PadPageProps = await getData(slug, pad);
     const { name, place, map, date, when, summary, route, startTime, bases, localBases, form, image, program, isCancelled, isClosed } = pageData;
@@ -90,7 +91,8 @@ const getData = async (slug: string, pad: string) => {
     };
 };
 
-const generateMetadata = async ({ params }): Promise<Metadata> => {
+const generateMetadata = async (props): Promise<Metadata> => {
+    const params = await props.params;
     const { slug, pad } = params;
     const camelCased = slug.replace(/-([a-z])/g, function (g: string[]) {
         return g[1].toUpperCase();

@@ -1,3 +1,4 @@
+import type { JSX } from "react";
 export interface IMeta {
     title: string;
     pageTitle: string;
