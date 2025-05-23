@@ -1,11 +1,8 @@
-import { Inter } from 'next/font/google';
 import styles from './Blockquote.module.scss';
-
-const inter = Inter({ subsets: ['latin'] });
 
 const Blockquote = ({ content }) => {
     return (
-        <div className={`${styles['blockquote-wrapper']} ${inter.className}`}>
+        <div className={`${styles['blockquote-wrapper']}`}>
             <blockquote className={styles['blockquote']}>
                 <h3>{content}</h3>
             </blockquote>

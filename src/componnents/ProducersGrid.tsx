@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { Inter } from 'next/font/google';
 import styles from './ProducersGrid.module.scss';
 import { IProducer } from '@/interfaces';
 
@@ -23,7 +22,6 @@ type Props = {
     ];
 };
 
-const inter = Inter({ subsets: ['latin'] });
 const ProducersGrid: React.FC<Props> = ({ producers }) => {
     return (
         <div className={styles.grid}>
@@ -31,7 +29,7 @@ const ProducersGrid: React.FC<Props> = ({ producers }) => {
                 <div key={id}>
                     {p.organizers ? (
                         <div className={styles.card}>
-                            <h4 className={inter.className}>
+                            <h4>
                                 {ProducersType[p.organizers[0].type]}
                             </h4>
                             <div className={styles.flex}>
@@ -44,7 +42,7 @@ const ProducersGrid: React.FC<Props> = ({ producers }) => {
                                             width={80}
                                             height={80}
                                         />
-                                        <p className={inter.className}>
+                                        <p>
                                             <small>{o.name}</small>
                                         </p>
                                     </div>
@@ -54,7 +52,7 @@ const ProducersGrid: React.FC<Props> = ({ producers }) => {
                     ) : null}
                     {p.participants ? (
                         <div className={styles.card}>
-                            <h4 className={inter.className}>
+                            <h4>
                                 {ProducersType[p.participants[0].type]}
                             </h4>
                             <div className={styles.flex}>
@@ -67,7 +65,7 @@ const ProducersGrid: React.FC<Props> = ({ producers }) => {
                                             width={80}
                                             height={80}
                                         />
-                                        <p className={inter.className}>
+                                        <p>
                                             <small>{o.name}</small>
                                         </p>
                                     </div>
@@ -77,7 +75,7 @@ const ProducersGrid: React.FC<Props> = ({ producers }) => {
                     ) : null}
                     {p.supporters ? (
                         <div className={styles.card}>
-                            <h4 className={inter.className}>
+                            <h4>
                                 {ProducersType[p.supporters[0].type]}
                             </h4>
                             <div className={styles.flex}>
@@ -90,7 +88,7 @@ const ProducersGrid: React.FC<Props> = ({ producers }) => {
                                             width={80}
                                             height={80}
                                         />
-                                        <p className={inter.className}>
+                                        <p>
                                             <small>{o.name}</small>
                                         </p>
                                     </div>
@@ -100,7 +98,7 @@ const ProducersGrid: React.FC<Props> = ({ producers }) => {
                     ) : null}
                     {p.collaborators ? (
                         <div className={styles.card}>
-                            <h4 className={inter.className}>
+                            <h4>
                                 {ProducersType[p.collaborators[0].type]}
                             </h4>
                             <div className={styles.flex}>
@@ -113,7 +111,7 @@ const ProducersGrid: React.FC<Props> = ({ producers }) => {
                                             width={80}
                                             height={80}
                                         />
-                                        <p className={inter.className}>
+                                        <p>
                                             <small>{o.name}</small>
                                         </p>
                                     </div>
@@ -123,7 +121,7 @@ const ProducersGrid: React.FC<Props> = ({ producers }) => {
                     ) : null}
                     {p.sponsors ? (
                         <div className={styles.card}>
-                            <h4 className={inter.className}>{ProducersType[p.sponsors[0].type]}</h4>
+                            <h4>{ProducersType[p.sponsors[0].type]}</h4>
                             <div className={styles.flex}>
                                 {p.sponsors.map((o, id) => (
                                     <div key={id}>
@@ -134,7 +132,7 @@ const ProducersGrid: React.FC<Props> = ({ producers }) => {
                                             width={80}
                                             height={80}
                                         />
-                                        <p className={inter.className}>
+                                        <p>
                                             <small>{o.name}</small>
                                         </p>
                                     </div>

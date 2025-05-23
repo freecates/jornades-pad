@@ -1,11 +1,8 @@
 import Link from 'next/link';
-import { Inter } from 'next/font/google';
 import Blockquote from './Blockquote';
 import SocialSharer from './SocialSharer';
 
 import styles from '@/app/page.module.scss';
-
-const inter = Inter({ subsets: ['latin'] });
 
 type Props = {
     title: string;
@@ -22,12 +19,11 @@ const Post: React.FC<Props> = ({ title, author, date, excerpt, id, slug, content
     return (
         <>
             <h1
-                className={`${inter.className}`}
                 dangerouslySetInnerHTML={{
                     __html: title,
                 }}
             />
-            <p className={inter.className}>
+            <p>
                 <small>
                     {author} | {date}
                 </small>
@@ -36,14 +32,14 @@ const Post: React.FC<Props> = ({ title, author, date, excerpt, id, slug, content
             <Blockquote content={excerpt} />
             {content ? (
                 <div
-                    className={`${inter.className} ${styles['m-b-1']}`}
+                    className={`${styles['m-b-1']}`}
                     dangerouslySetInnerHTML={{
                         __html: content,
                     }}
                 />
             ) : null}
             <SocialSharer type={type} id={id} slug={slug} title={title} />
-            <p className={inter.className}>
+            <p>
                 <small>
                     <Link href={'/blog'}>[tornar]</Link>
                 </small>

@@ -1,12 +1,9 @@
-import { Inter } from 'next/font/google';
 import { IEvent } from '@/interfaces';
 import { dateToLocale } from '@/utils/dateToLocale';
 import AddToCalendarButtonWrapper from './AddToCalendarButtonWrapper';
 import Link from 'next/link';
 
 import styles from './EventsList.module.scss';
-
-const inter = Inter({ subsets: ['latin'] });
 
 const calendars: ('Apple' | 'Google' | 'iCal' | 'Microsoft365' | 'MicrosoftTeams' | 'Outlook.com' | 'Yahoo')[] = [
     "Apple",    // Apple Calendar
@@ -29,7 +26,7 @@ const EventsList: React.FC<Props> = ({ events }) => {
                         {events.length > 1 ? (
                             <Link href={`/les-jornades-pad/${e.route}`}>
                                 <h2
-                                    className={`${inter.className}  ${
+                                    className={` ${
                                         e.route ? styles[e.route] : ''
                                     }`}
                                 >
@@ -42,7 +39,7 @@ const EventsList: React.FC<Props> = ({ events }) => {
                                 <small>[CANCEL·LAT]</small>
                             </span>
                         ) : null}
-                        <ul className={inter.className}>
+                        <ul>
                             <li>
                                 <strong>On:</strong> {e.place}{' '}
                                 <a title={`Com arribar a: ${e.place}`} href={e.map} target='_blank'>
@@ -125,7 +122,7 @@ const EventsList: React.FC<Props> = ({ events }) => {
                             </li>
                         </ul>
                     </div>
-                ) : null,
+                ) : <p>No hi ha jornades</p>,
             )}
         </div>
     );
