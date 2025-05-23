@@ -1,35 +1,32 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import { Inter } from 'next/font/google';
-import api from '@/libs/api.js';
-import { htmlToString } from '@/utils/htmlToString';
-import { IMeta, IEvent } from '@/interfaces';
-import EventsList from '@/componnents/EventsList';
 import Blockquote from '@/componnents/Blockquote';
+import EventsList from '@/componnents/EventsList';
+import { IEvent } from '@/interfaces';
+import api from '@/libs/api.js';
+import findNumberByNameWithFind from '@/utils/findNumberByNameWithFind';
+import { htmlToString } from '@/utils/htmlToString';
+import type { Metadata } from 'next';
 
 import styles from '@/app/page.module.scss';
 import slugPageStyles from './slugPage.module.scss';
 
-const inter = Inter({ subsets: ['latin'] });
+const padPages = [{ 'les-jornades-pad': 679 }, { 'el-pad-social': 680 }, { 'el-pad': 681 }];
 
 type SlugPageProps = {
     pageData: {
-        meta: IMeta;
+        title: {
+            rendered: string;
+        };
+        acf: {
+            quote: string;
+        };
         content: {
-            title: string;
-            mainContent?: string;
-            pads?: IEvent[];
-            image?: string;
-            icon?: string;
-            excerpt?: string;
-            poster?: {
-                name: string;
-                url: string;
-            };
-            instagram?: {
-                url: string;
-                name: string;
-            };
+            rendered: string;
+        };
+        mainContent?: string;
+        pads?: IEvent[];
+        poster?: {
+            name: string;
+            url: string;
         };
     };
 };
@@ -37,63 +34,27 @@ type SlugPageProps = {
 export default async function SlugPage(props) {
     const params = await props.params;
     const { slug } = params;
-    const { pageData }: SlugPageProps = await getData(slug);
-    const { content } = pageData;
+    const { pageData }: SlugPageProps = await getPageDataFromCMS(slug);
+    const poster = null;
+    const pads = null;
     return (
         <>
             <div className={styles.content}>
-                {content.image ? (
-                    <div className={`${slugPageStyles['image-wrapper']}`}>
-                        <Image src={`/${content.image}`} alt={content.title} fill={true} priority />
-                    </div>
-                ) : null}
-                <h1 className={`${inter.className} ${content.icon ? styles.flex : ''}`}>
-                    {content.icon ? (
-                        <Image
-                            src={`/${content.icon}`}
-                            alt={content.title}
-                            className={styles.logo}
-                            width={95}
-                            height={95}
-                            priority
-                        />
-                    ) : null}
-                    {content.instagram ? (
-                        <span className={slugPageStyles.grid}>
-                            {content.title}
-                            <small>
-                                <a
-                                    href={content.instagram.url}
-                                    target='_blank'
-                                    title={content.instagram.name}
-                                >
-                                    @{content.instagram.name}
-                                </a>
-                            </small>
-                        </span>
-                    ) : (
-                        content.title
-                    )}
-                </h1>
-                {content?.excerpt ? <Blockquote content={content?.excerpt} /> : null}
-                {content?.mainContent ? (
+                <h1>{pageData?.title?.rendered}</h1>
+                {pageData?.acf?.quote ? <Blockquote content={pageData?.acf?.quote} /> : null}
+                {pageData?.content?.rendered ? (
                     <div
-                        className={inter.className}
                         dangerouslySetInnerHTML={{
-                            __html: content.mainContent,
+                            __html: pageData?.content?.rendered,
                         }}
                     />
                 ) : null}
-                {content?.poster ? (
-                    <ul className={`${inter.className} ${slugPageStyles.list}`}>
+                {poster ? (
+                    <ul className={`${slugPageStyles.list}`}>
                         <li>
-                            <strong>{content.poster.name}:</strong>{' '}
-                            {content.poster.url ? (
-                                <a
-                                    title={`Descarregar: ${content.poster.name}`}
-                                    href={content.poster.url}
-                                    download
-                                >
+                            <strong>{poster.name}:</strong>{' '}
+                            {poster.url ? (
+                                <a title={`Descarregar: ${poster.name}`} href={poster.url} download>
                                     [<span className={slugPageStyles.down}>&#8595;</span>]
                                 </a>
                             ) : (
@@ -102,9 +63,9 @@ export default async function SlugPage(props) {
                         </li>
                     </ul>
                 ) : null}
-                {content?.pads ? (
-                    <div className={inter.className}>
-                        <EventsList events={content.pads} />
+                {pads ? (
+                    <div>
+                        <EventsList events={pads} />
                     </div>
                 ) : null}
             </div>
@@ -112,14 +73,15 @@ export default async function SlugPage(props) {
     );
 }
 
-const getData = async (slug: string) => {
-    const camelCased = slug.replace(/-([a-z])/g, function (g) {
-        return g[1].toUpperCase();
-    });
-    const data = await api.padData.getData(camelCased);
-    return {
-        pageData: !data ? null : { ...data[0] },
-    };
+const getPageDataFromCMS = async (slug: string) => {
+    const id = findNumberByNameWithFind(slug, padPages);
+    const pageData = await api.wpData.getData('pagina-del-web-pad', null, id, null, 30);
+
+    if (!pageData.data) {
+        return { pageData };
+    } else {
+        return { pageData: null };
+    }
 };
 
 const generateMetadata = async (props): Promise<Metadata> => {

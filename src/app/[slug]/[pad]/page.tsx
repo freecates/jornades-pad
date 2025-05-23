@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import api from '@/libs/api.js';
 import { htmlToString } from '@/utils/htmlToString';
 import EventsList from '@/componnents/EventsList';
@@ -8,8 +7,6 @@ import EventsList from '@/componnents/EventsList';
 import styles from '@/app/page.module.scss';
 import padPageStyles from './padPage.module.scss';
 import Link from 'next/link';
-
-const inter = Inter({ subsets: ['latin'] });
 
 type PadPageProps = {
     pageData: {
@@ -50,24 +47,24 @@ export default async function PadPage(props) {
                     />
                 </div>
 
-                <h1 className={`${inter.className} ${padPageStyles.title} ${route ? padPageStyles[route] : ''}`}>
+                <h1 className={`${padPageStyles.title} ${route ? padPageStyles[route] : ''}`}>
                     {name}
                 </h1>
                 {summary ? (
                     <div
-                        className={`${inter.className} ${styles['m-b-1']}`}
+                        className={`${styles['m-b-1']}`}
                         dangerouslySetInnerHTML={{
                             __html: summary,
                         }}
                     />
                 ) : null}
                 {date ? (
-                    <div className={inter.className}>
+                    <div>
                         <EventsList events={event} />
                     </div>
                 ) : null}
                 
-                <p className={inter.className}>
+                <p>
                     <small>
                         <Link href={'/les-jornades-pad'}>[tornar]</Link>
                     </small>
