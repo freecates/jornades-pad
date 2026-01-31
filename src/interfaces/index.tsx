@@ -14,6 +14,7 @@ export interface IRoute {
 
 export interface IEvent {
     name: string;
+    type: string;
     place: string;
     map: string;
     date: string;
@@ -21,12 +22,14 @@ export interface IEvent {
     route: string;
     summary: string;
     startTime: string;
+    endTime: string;
     bases: string;
     localBases: string;
     form: string;
     program: string;
     isCancelled: boolean;
     isClosed?: boolean;
+    image?: string;
 }
 
 export interface IPost {

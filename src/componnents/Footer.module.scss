@@ -7,7 +7,7 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(33%, auto));
+    grid-template-columns: repeat(4, minmax(25%, auto));
     width: var(--max-width);
     max-width: 100%;
 
@@ -56,7 +56,7 @@
     }
         
     .blog-route {
-        grid-column: span 3;
+        grid-column: span 4;
         text-align: center;
     }
 
