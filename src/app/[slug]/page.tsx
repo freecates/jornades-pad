@@ -8,8 +8,11 @@ import type { Metadata } from 'next';
 
 import styles from '@/app/page.module.scss';
 import slugPageStyles from './slugPage.module.scss';
+import findNameByNumberWithFind from '@/utils/findNameByNumberWithFind';
+import eventMapper from '@/utils/eventMapper';
 
-const padPages = [{ 'les-jornades-pad': 679 }, { 'el-pad-social': 680 }, { 'el-pad': 681 }];
+const padPages = [{ 'les-jornades-pad': 679 }, { 'el-pad-social': 680 }, { 'el-pad': 681 }, { 'el-pad-academia': 700 }];
+const postPages = [{679: 'pad-jornada'}, {680: 'pad-social'}];
 
 type SlugPageProps = {
     pageData: {
@@ -31,12 +34,11 @@ type SlugPageProps = {
     };
 };
 
-export default async function SlugPage(props) {
-    const params = await props.params;
-    const { slug } = params;
+export default async function SlugPage({ params }: { params: { slug: string; }; }) {
+    const { slug } = await params;
     const { pageData }: SlugPageProps = await getPageDataFromCMS(slug);
     const poster = null;
-    const pads = null;
+    const { pads } = pageData;
     return (
         <>
             <div className={styles.content}>
@@ -75,18 +77,22 @@ export default async function SlugPage(props) {
 
 const getPageDataFromCMS = async (slug: string) => {
     const id = findNumberByNameWithFind(slug, padPages);
-    const pageData = await api.wpData.getData('pagina-del-web-pad', null, id, null, 30);
+    const name = findNameByNumberWithFind(id, postPages);
+    const [pageData, postPagedData] = await Promise.all([
+        api.wpData.getData('pagina-del-web-pad', null, id, null, 30),
+        api.wpData.getData(name, null, null, null, 30),
+    ]);
+    const pads = postPagedData?.map?.(eventMapper);
 
     if (!pageData.data) {
-        return { pageData };
+        return { pageData: { ...pageData, pads } };
     } else {
         return { pageData: null };
     }
 };
 
-const generateMetadata = async (props): Promise<Metadata> => {
-    const params = await props.params;
-    const { slug } = params;
+const generateMetadata = async ({ params }: { params: { slug: string; }; }): Promise<Metadata> => {
+    const { slug } = await params;
     const camelCased = slug.replace(/-([a-z])/g, function (g) {
         return g[1].toUpperCase();
     });
@@ -108,8 +114,7 @@ export const generateStaticParams = async () => {
     return [{ slug: 'el-pad' }, { slug: 'el-pad-social' }, { slug: 'les-jornades-pad' }];
 };
 
-export const dynamicParams = false;
-
+export const dynamicParams = true;
 export const revalidate = 30;
 
 export { generateMetadata };

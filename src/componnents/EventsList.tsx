@@ -23,8 +23,8 @@ const EventsList: React.FC<Props> = ({ events }) => {
                         className={`${styles.card} ${e.isCancelled ? styles.cancelled : ''}`}
                         key={id}
                     >
-                        {events.length > 1 ? (
-                            <Link href={`/les-jornades-pad/${e.route}`}>
+                        {events.length > 0 ? (
+                            <Link href={`/${e.type}/${e.route}`}>
                                 <h2
                                     className={` ${
                                         e.route ? styles[e.route] : ''
@@ -118,6 +118,7 @@ const EventsList: React.FC<Props> = ({ events }) => {
                                     organizer={'Adhoc Cultura|info@adhoc-cultura.com'}
                                     description={e.summary}
                                     startTime={e.startTime}
+                                    endTime={e.endTime}
                                 />
                             </li>
                         </ul>

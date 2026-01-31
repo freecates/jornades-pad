@@ -7,39 +7,39 @@ import EventsList from '@/componnents/EventsList';
 import styles from '@/app/page.module.scss';
 import padPageStyles from './padPage.module.scss';
 import Link from 'next/link';
+import eventMapper from '@/utils/eventMapper';
 
 type PadPageProps = {
-    pageData: {
-        name: string;
-        place: string;
-        map: string;
-        date: string;
-        when: string;
-        summary: string;
-        route: string;
-        startTime: string;
-        bases: string;
-        localBases: string;
-        form: string;
-        image: string;
-        program: string;
-        isCancelled: boolean;
-        isClosed: boolean;
-    };
+    name: string;
+    place: string;
+    map: string;
+    date: string;
+    when: string;
+    summary: string;
+    route: string;
+    startTime: string;
+    endTime: string;
+    bases: string;
+    localBases: string;
+    form: string;
+    image?: string;
+    program: string;
+    isCancelled: boolean;
+    isClosed?: boolean;
+    type: string;
 };
 
-export default async function PadPage(props) {
-    const params = await props.params;
-    const { slug, pad } = params;
-    const { pageData }: PadPageProps = await getData(slug, pad);
-    const { name, place, map, date, when, summary, route, startTime, bases, localBases, form, image, program, isCancelled, isClosed } = pageData;
-    const event = [{name, place, map, route, date, when, summary, startTime, bases, localBases, form, program, isCancelled, isClosed }];
+export default async function PadPage({ params }: { params: { slug: string; pad: string; }; }) {
+    const { slug, pad } = await params;
+    const pageData: PadPageProps = await getPageDataFromCMS(slug, pad);
+    const { name, place, map, date, when, summary, route, startTime, endTime, bases, localBases, form, image, program, isCancelled, isClosed, type } = pageData;
+    const event = [{name, place, map, route, date, when, summary, startTime, endTime, bases, localBases, form, program, isCancelled, isClosed, type }];
     return (
         <>
             <div className={styles.content}>
                 <div className={padPageStyles['image-wrapper']}>
                     <Image
-                        src={`/${image}`}
+                        src={image}
                         alt={name}
                         className={styles.adhocLogo}
                         fill={true}
@@ -66,7 +66,7 @@ export default async function PadPage(props) {
                 
                 <p>
                     <small>
-                        <Link href={'/les-jornades-pad'}>[tornar]</Link>
+                        <Link href={'/les-jornades-pad'}>[tornar a les jornades PAD]</Link>, <Link href={'/el-pad-social'}>[tornar al PAD Social]</Link>
                     </small>
                 </p>
                 
@@ -75,30 +75,22 @@ export default async function PadPage(props) {
     );
 }
 
-const getData = async (slug: string, pad: string) => {
-    const camelCased = slug.replace(/-([a-z])/g, function (g) {
-        return g[1].toUpperCase();
-    });
-    const data = await api.padData.getData(camelCased);
-    const pads = data[0].content.pads;
-    const padData = pads.filter((x: { route: string; }) => x.route === pad);
+const getPageDataFromCMS = async (slug: string, pad: string) => {
+    const postPagedData = await api.wpData.getData(slug, null, null, null, 30);
+    const padData = eventMapper(postPagedData.find((x: { slug: string; }) => x.slug === pad));
 
-    return {
-        pageData: !data ? null : { ...padData[0] },
-    };
+    if (!padData) {
+        return null;
+    } else {
+        return padData;
+    }
 };
 
 const generateMetadata = async (props): Promise<Metadata> => {
     const params = await props.params;
     const { slug, pad } = params;
-    const camelCased = slug.replace(/-([a-z])/g, function (g: string[]) {
-        return g[1].toUpperCase();
-    });
-    const data = await api.padData.getData(camelCased);
-    if (!data) return { title: 'Not Found' };
-    const pads = data[0].content.pads;
-    const padData = pads.filter((x: { route: any; }) => x.route === pad);
-    const { name, summary } = padData[0];
+    const pageData: PadPageProps = await getPageDataFromCMS(slug, pad);
+    const { name, summary } = pageData;
     const description = htmlToString(summary);
     return {
         title: `${name}`,
@@ -109,17 +101,7 @@ const generateMetadata = async (props): Promise<Metadata> => {
     };
 };
 
-export const generateStaticParams = async () => {
-    return [
-        { slug: 'les-jornades-pad', pad: 'pad-3dt' },
-        { slug: 'les-jornades-pad', pad: 'pad-terra' },
-        { slug: 'les-jornades-pad', pad: 'pad-mev' },
-        { slug: 'les-jornades-pad', pad: 'pad-fida' },
-    ];
-};
-
-export const dynamicParams = false;
-
+export const dynamicParams = true;
 export const revalidate = 30;
 
 export { generateMetadata };
