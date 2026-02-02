@@ -19,6 +19,7 @@ const eventMapper = (event: any): IEvent => {
         isCancelled: event.acf.iscancelled,
         isClosed: event.acf.isclosed,
         image: event.acf.image,
+        video: event.acf.video,
     };
 };
 

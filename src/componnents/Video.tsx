@@ -6,6 +6,7 @@ type VideoProps = {
     loop?: boolean;
     muted?: boolean;
     autoPlay?: boolean;
+    controls?: boolean;
 };
 
 const Video: React.FC<VideoProps> = ({ data, ...props }) => {
