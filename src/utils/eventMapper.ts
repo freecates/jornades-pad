@@ -1,6 +1,7 @@
 import { IEvent } from "@/interfaces";
 
 const eventMapper = (event: any): IEvent => {
+    if (!event) return;
     return {
         name: event.title.rendered,
         type: event.type,
@@ -19,6 +20,7 @@ const eventMapper = (event: any): IEvent => {
         isCancelled: event.acf.iscancelled,
         isClosed: event.acf.isclosed,
         image: event.acf.image,
+        video: event.acf.video,
     };
 };
 

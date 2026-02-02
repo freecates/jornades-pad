@@ -30,6 +30,7 @@ export interface IEvent {
     isCancelled: boolean;
     isClosed?: boolean;
     image?: string;
+    video?: object;
 }
 
 export interface IPost {

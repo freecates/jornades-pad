@@ -8,10 +8,13 @@ import padPageStyles from './padPage.module.scss';
 import Link from 'next/link';
 import eventMapper from '@/utils/eventMapper';
 import { notFound } from 'next/navigation';
+import { IVideo } from '@/interfaces';
+import videoMapper from '@/utils/videoMapper';
+import Video from '@/componnents/Video';
 
 type Params = Promise<{ slug: string; pad: string }>;
 
-type PadPageProps = {
+type PadPageData = {
     name: string;
     place: string;
     map: string;
@@ -25,6 +28,7 @@ type PadPageProps = {
     localBases: string;
     form: string;
     image?: string;
+    video?: IVideo;
     program: string;
     isCancelled: boolean;
     isClosed?: boolean;
@@ -40,7 +44,7 @@ const getPageDataFromCMS = async (slug: string, pad: string) => {
     if (!padData) {
         return null;
     } else {
-        return padData;
+        return { ...padData, video: videoMapper(padData.video) };
     }
 };
 
@@ -48,11 +52,6 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     const { slug, pad } = await params; 
     const pageData = await getPageDataFromCMS(slug, pad);
     
-    if (!pageData) {
-        return {
-            title: 'Pàgina no trobada',
-        };
-    }
     if (!pageData) {
         return {
             title: 'Pàgina no trobada',
@@ -73,13 +72,13 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 export default async function PadPage({ params }: { params: Params }) {
     const { slug, pad } = await params; 
     
-    const pageData = await getPageDataFromCMS(slug, pad);
+    const pageData: PadPageData | null = await getPageDataFromCMS(slug, pad);
 
     if (!pageData) {
         return notFound(); 
     }
 
-    const { name, place, map, date, when, summary, route, startTime, endTime, bases, localBases, form, image, program, isCancelled, isClosed, type } = pageData;
+    const { name, place, map, date, when, summary, route, startTime, endTime, bases, localBases, form, image, video, program, isCancelled, isClosed, type } = pageData;
     
     const event = [{name, place, map, route, date, when, summary, startTime, endTime, bases, localBases, form, program, isCancelled, isClosed, type }];
     
@@ -108,6 +107,9 @@ export default async function PadPage({ params }: { params: Params }) {
                             __html: summary,
                         }}
                     />
+                ) : null}
+                {video ? (
+                    <Video data={video} controls={true} loop={true} />
                 ) : null}
                 {date ? (
                     <div>
