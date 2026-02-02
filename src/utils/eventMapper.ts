@@ -1,6 +1,7 @@
 import { IEvent } from "@/interfaces";
 
 const eventMapper = (event: any): IEvent => {
+    if (!event) return;
     return {
         name: event.title.rendered,
         type: event.type,

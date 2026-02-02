@@ -44,7 +44,7 @@ const getPageDataFromCMS = async (slug: string, pad: string) => {
     if (!padData) {
         return null;
     } else {
-        return { ...padData, video: padData.video ? videoMapper(padData.video) : undefined };
+        return { ...padData, video: videoMapper(padData.video) };
     }
 };
 

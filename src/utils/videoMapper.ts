@@ -1,6 +1,7 @@
 import { IVideo } from "@/interfaces";
 
 const videoMapper = (video: any): IVideo => {
+    if (!video) return;
     return {
         width: video.width,
         height: video.height,
