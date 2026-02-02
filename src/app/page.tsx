@@ -30,7 +30,7 @@ export default async function Home() {
         <>
             <div className={styles.center}>
                 <div className={styles.wrapperVideo}>
-                    <Video data={home.videos.mainVideo} />
+                    <Video data={home.videos.mainVideo} loop muted autoPlay />
                 </div>
             </div>
         </>
