@@ -1,8 +1,8 @@
-import Video from '@/componnents/Video';
+import { IVideo } from '@/interfaces';
 import api from '@/libs/api.js';
-import styles from './page.module.scss';
+import Video from '@/componnents/Video';
 
-import type { JSX } from "react";
+import styles from './page.module.scss';
 
 type HomeProps = {
     home: {
@@ -11,15 +11,7 @@ type HomeProps = {
             where: string;
         };
         videos: {
-            mainVideo: {
-                width: string;
-                height: string;
-                srcSet: {
-                    src: string;
-                    type: string;
-                    map(arg0: (d: any, index: any) => JSX.Element): import('react').ReactNode;
-                };
-            };
+            mainVideo: IVideo;
         };
     };
 };

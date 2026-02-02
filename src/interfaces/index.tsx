@@ -50,3 +50,13 @@ export interface IProducer {
     name: string;
     url: string;
 }
+
+export interface IVideo {
+    width: string;
+    height: string;
+    srcSet: {
+        src: string;
+        type: string;
+    }[];
+}
+

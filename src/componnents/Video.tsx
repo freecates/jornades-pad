@@ -1,17 +1,8 @@
+import { IVideo } from '@/interfaces';
 import styles from './Video.module.scss';
 
-import type { JSX } from "react";
-
 type VideoProps = {
-    data: {
-        width: string;
-        height: string;
-        srcSet: {
-            src: string;
-            type: string;
-            map(arg0: (d: any, index: any) => JSX.Element): import('react').ReactNode;
-        };
-    };
+    data: IVideo
     loop?: boolean;
     muted?: boolean;
     autoPlay?: boolean;
