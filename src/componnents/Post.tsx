@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Blockquote from './Blockquote';
 import SocialSharer from './SocialSharer';
 
-import styles from '@/app/page.module.scss';
+import styles from './Post.module.scss';
 
 type Props = {
     title: string;
@@ -17,7 +17,7 @@ type Props = {
 const Post: React.FC<Props> = ({ title, author, date, excerpt, id, slug, content }) => {
     const type = 'blog';
     return (
-        <>
+        <div className={`${styles['post-wrapper']}`}>
             <h1
                 dangerouslySetInnerHTML={{
                     __html: title,
@@ -44,7 +44,7 @@ const Post: React.FC<Props> = ({ title, author, date, excerpt, id, slug, content
                     <Link href={'/blog'}>[tornar]</Link>
                 </small>
             </p>
-        </>
+        </div>
     );
 };
 
