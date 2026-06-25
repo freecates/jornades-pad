@@ -1,42 +1,37 @@
-@import 'grid';
+@import "grid";
 
 .grid {
-    text-align: center;
+  text-align: center;
+  width: 100%;
 
-    @media (min-width: 768px) {
-
-        div {
-
-            &:first-child,
-            &:last-child,
-            &:nth-child(2) {
-
-                grid-column: span 2;
-            }
-        }
+  @media (min-width: 768px) {
+    div {
+      &:first-child,
+      &:last-child,
+      &:nth-child(2) {
+        grid-column: span 2;
+      }
     }
+  }
 
+  .flex {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 
-    .flex {
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
-
-        div {
-            flex-basis: 25%;
-            margin: 1rem 0;
-        }
+    div {
+      flex-basis: 25%;
+      margin: 1rem 0;
     }
+  }
 }
 
-
-
 @media (prefers-color-scheme: dark) {
-    .adhocLogo {
-        filter: invert(1);
-    }
+  .adhocLogo {
+    filter: invert(1);
+  }
 
-    .logo {
-        filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
-    }
+  .logo {
+    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
+  }
 }
